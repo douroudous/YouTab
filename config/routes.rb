@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   resources :artists
 
   resources :songs do
-    resources :reviews
+    resources :reviews, only: [:new, :create]
   end
   resources :users, only: [:index, :show, :destroy]
 
+  resources :reviews, only: [:edit, :update, :destroy]
 
 end

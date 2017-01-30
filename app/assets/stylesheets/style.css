@@ -9,6 +9,10 @@ nav, form{
   text-align: center;
 }
 
+.notice {
+  text-align: center;
+}
+
 .top-menu {
   text-align: center;
   display: inline-block;

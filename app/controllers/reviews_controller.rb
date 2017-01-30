@@ -1,9 +1,5 @@
 class ReviewsController < ApplicationController
 
-  def show
-    @review = Review.find(params[:id])
-  end
-
   def new
     @review = Review.new
   end
@@ -32,7 +28,7 @@ class ReviewsController < ApplicationController
       redirect_to song_path(@review.song)
     else
       flash.now[:notice] = @review.errors.full_messages
-      render :edit
+      redirect_to song_path(@review.song)
     end
   end
 

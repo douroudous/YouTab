@@ -1,0 +1,17 @@
+<h1>Update Review Form</h1>
+
+<div class="row">
+  <%= form_for [@song, @review] do |f| %>
+  <div class="small-1 columns inline-block">
+    <%= f.label :rating %>
+    <%= f.select :rating, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
+  </div>
+    <div class="small-9 columns inline-block">
+    <%= f.label :body, "Review" %>
+    <%= f.text_field :body %>
+    </div>
+    <div class="small-2 columns add-review">
+      <%= f.submit "Update Review"%>
+    </div>
+    <% end %>
+  </div>
