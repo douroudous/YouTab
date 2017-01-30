@@ -1,8 +1,12 @@
 <h2>Artists</h2>
 <h3><%= link_to "New Artist", new_artist_path %></h3>
-<p class="small-6 columns">Title</p>
-<p class="small-6 columns"># of Tabs</p>
+</br>
+
+<p class="small-3 columns">Title</p>
+<p class="small-3 columns"># of Tabs</p>
+<p class="small-6 columns">Latest Upload Date</p>
 <% @artists.each do |artist| %>
-  <p class="small-6 columns"><%= link_to "#{artist.name}", artist %> </p>
-  <p class="small-6 columns"><%= artist.songs.length %></p>
+  <p class="small-3 columns"><%= link_to artist.name, artist %> </p>
+  <p class="small-3 columns"><%= artist.songs.length %></p>
+  <p class="small-6 columns"><%= artist.songs.order(created_at: :desc).first.created_at.strftime("%Y-%m-%d") %> </p>
 <% end %>

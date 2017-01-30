@@ -1,9 +1,13 @@
 <h2>Users</h2>
+</br>
+
+<p class="small-2 columns">User</p>
+<p class="small-2 columns"># of Tabs</p>
+<p class="small-8 columns"># of Reviews</p>
 
 <% @users.each do |user| %>
-
   <p class="small-2 columns"><%= link_to user.username, user %></p>
-  <p class="small-10 columns"><%= link_to "Delete User", user, method: :delete %></p>
-
-
+  <p class="small-2 columns"><%= user.songs.length %></p>
+  <p class="small-2 columns"><%= user.reviews.length %></p>
+  <p class="small-6 columns"><%= link_to "Delete User", user, method: :delete %></p>
 <% end %>
