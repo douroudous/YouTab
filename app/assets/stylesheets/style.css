@@ -9,6 +9,10 @@ nav, form{
   text-align: center;
 }
 
+.notice {
+  text-align: center;
+}
+
 .top-menu {
   text-align: center;
   display: inline-block;
@@ -29,8 +33,11 @@ nav, form{
   display: inline-block;
 }
 
-
 .notice {
   color: red;
   font-weight: bold;
+}
+
+.add-review{
+  padding-top: 30px;
 }

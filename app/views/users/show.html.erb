@@ -3,14 +3,31 @@
 <% if @user.id == current_user.id %>
   <h3> <%= link_to 'Edit Account', edit_user_registration_path %> </h3>
 <% end %>
-
+</br>
+<h3> <%= @user.username %>'s Tabs </h3>
 <div class="row">
-  <p class="small-4 columns">Title</p>
-  <p class="small-4 columns">Artist</p>
-  <p class="small-4 columns">Date</p>
+  <p class="small-3 columns">Title</p>
+  <p class="small-3 columns">Artist</p>
+  <p class="small-6 columns">Date</p>
   <% @user.songs.each do |song| %>
-    <p class="small-4 columns"><%= link_to "#{song.title}", song %> </p>
-    <p class="small-4 columns"><%= link_to "#{song.artist.name}", song.artist %> </p>
-    <p class="small-4 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
+    <p class="small-3 columns"><%= link_to "#{song.title}", song %> </p>
+    <p class="small-3 columns"><%= link_to "#{song.artist.name}", song.artist %> </p>
+    <p class="small-6 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
+  <% end %>
+</div>
+</br>
+<h3> <%= @user.username %>'s Reviews </h3>
+<div class="row">
+  <p class="small-2 columns">Date</p>
+  <p class="small-2 columns">Title</p>
+  <p class="small-2 columns">Artist</p>
+  <p class="small-2 columns">Rating</p>
+  <p class="small-4 columns">Review</p>
+  <% @user.reviews.each do |review| %>
+    <p class="small-2 columns"><%= review.created_at.strftime("%Y-%m-%d") %> </p>
+    <p class="small-2 columns"><%= link_to review.song.title, review.song %></p>
+    <p class="small-2 columns"><%= link_to review.song.artist.name, review.song.artist %></p>
+    <p class="small-2 columns"><%= review.rating %> </p>
+    <p class="small-4 columns"><%= review.body %> </p>
   <% end %>
 </div>

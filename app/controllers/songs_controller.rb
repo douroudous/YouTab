@@ -6,6 +6,10 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+    @review = Review.new
+    @reviews = @song.reviews
+    @reviews = @reviews.order(created_at: :desc)
+    @avg_rating = avg_rating(@song)
   end
 
   def new
@@ -49,6 +53,12 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title, :artist_id)
+  end
+
+  def avg_rating(song)
+    sum = song.reviews.sum("rating")
+    count = song.reviews.length.to_f
+    sum/count
   end
 
 end
