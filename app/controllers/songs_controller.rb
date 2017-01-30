@@ -6,6 +6,9 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+    @review = Review.new
+    @reviews = @song.reviews
+    @reviews = @reviews.order(created_at: :desc)
   end
 
   def new

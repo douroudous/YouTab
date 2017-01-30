@@ -2,6 +2,36 @@
 <h3> <%= link_to @song.artist.name, @song.artist %> </h3>
 <h3> <%= link_to @song.user.username, @song.user %> </h3>
 
+<div class="row">
+  <%= form_for [@song, @review] do |f| %>
+  <div class="small-1 columns inline-block">
+    <%= f.label :rating %>
+    <%= f.select :rating, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
+  </div>
+    <div class="small-9 columns inline-block">
+    <%= f.label :body, "Review" %>
+    <%= f.text_field :body %>
+    </div>
+    <div class="small-2 columns add-review">
+      <%= f.submit "Add Review"%>
+    </div>
+    <% end %>
+  </div>
+
+<div class="row">
+  <p class="small-2 columns">Date</p>
+  <p class="small-2 columns">User</p>
+  <p class="small-2 columns">Rating</p>
+  <p class="small-6 columns">Review</p>
+
+  <% @reviews.each do |review| %>
+    <p class="small-2 columns"><%= review.created_at.strftime("%Y-%m-%d") %> </p>
+    <p class="small-2 columns"><%= link_to review.user.username, review.user %></p>
+    <p class="small-2 columns"><%= review.rating %> </p>
+    <p class="small-6 columns"><%= review.body %> </p>
+  <% end %>
+</div>
+
 <div>
   <p><%= link_to "Update Tab", edit_song_path %></p>
   <p><%= link_to "Delete Tab", @song, method: :delete %></p>

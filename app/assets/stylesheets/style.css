@@ -29,8 +29,11 @@ nav, form{
   display: inline-block;
 }
 
-
 .notice {
   color: red;
   font-weight: bold;
+}
+
+.add-review{
+  padding-top: 30px;
 }

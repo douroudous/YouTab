@@ -40,9 +40,6 @@ class ArtistsController < ApplicationController
 
   def destroy
     @artist = Artist.find(params[:id])
-    @artist.songs.each do |song|
-      song.destroy
-    end
     @artist.destroy
     redirect_to artists_path
   end
