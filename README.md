@@ -1,5 +1,7 @@
 ![Build Status](https://codeship.com/projects/5c41c090-c932-0134-4c4c-422f29a80ca3/status?branch=master)
 ![Code Climate](https://codeclimate.com/github/douroudous/youtab.png)
+[![Code Climate](https://codeclimate.com/github/douroudous/YouTab/badges/gpa.svg)](https://codeclimate.com/github/douroudous/YouTab)
+[![Test Coverage](https://codeclimate.com/github/douroudous/YouTab/badges/coverage.svg)](https://codeclimate.com/github/douroudous/YouTab/coverage)
 ![Coverage Status](https://coveralls.io/repos/douroudous/youtab/badge.png)
 
 == README
