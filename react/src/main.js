@@ -5,8 +5,12 @@ import App from './components/App';
 import data from './constants/data';
 
 $(function() {
-ReactDOM.render(
-  <App data={data} />,
-  document.getElementById('app')
-);
+  if (document.getElementById('app')) {
+    ReactDOM.render(
+      <App
+        data={data}
+      />,
+      document.getElementById('app')
+    );
+  }
 });

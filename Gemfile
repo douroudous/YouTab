@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem 'devise'
 gem "coffee-rails", "~> 4.1.0"
 gem "foundation-rails"
 gem "haml-rails"

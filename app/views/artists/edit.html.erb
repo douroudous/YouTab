@@ -1,0 +1,13 @@
+<h2>Edit Artist Form</h2>
+
+<%= form_for(@artist) do |f| %>
+  <div class="inline-block new-song">
+    <div class="text">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+      <%= f.submit "Update Artist"%>
+
+</div>
+<% end %>

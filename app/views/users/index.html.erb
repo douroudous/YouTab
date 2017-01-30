@@ -1,0 +1,9 @@
+<h2>Users</h2>
+
+<% @users.each do |user| %>
+
+  <p class="small-2 columns"><%= link_to user.username, user %></p>
+  <p class="small-10 columns"><%= link_to "Delete User", user, method: :delete %></p>
+
+
+<% end %>

@@ -5,7 +5,7 @@ class Tab extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      chord: ["","","","","",""]
+      chord: new Array(this.props.strings.data.length)
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
@@ -13,10 +13,10 @@ class Tab extends React.Component {
   handleFormSubmit(event) {
     event.preventDefault();
     let string = event.target.id;
-    let fret = event.target.value;
+    let fret = parseInt(event.target.value);
     let chord = this.state.chord;
     if (fret){
-      chord[string] = parseInt(fret);
+      chord[string] = fret;
     } else {
       chord[string] = "";
     }
@@ -30,9 +30,14 @@ class Tab extends React.Component {
       let song = this.props.song;
       let stringNumber = string.id;
       let stringLine = [];
+      let stringNote = {};
       for (let note of song) {
         note = note.split(',');
-        stringLine.push(note[stringNumber]);
+        stringNote = {
+                  id: stringNumber,
+                  note: note[stringNumber]
+                };
+        stringLine.push(stringNote);
       }
 
       return(
@@ -49,7 +54,7 @@ class Tab extends React.Component {
 
       return (
         <div className="page">
-          <h1>Guitar Tabs</h1>
+          <h1>YouTab</h1>
           <ul>
             {strings}
           </ul>

@@ -1,22 +1,26 @@
 import React from 'react';
+import Note from './Note';
 
 const String  = props => {
 
+  let notes = props.stringLine.map (note => {
+    return(
+      <Note
+        key = {note.id}
+        id = {note.id}
+        note = {note.note}
+      />
+    );
+  });
 
-  let string = props.stringLine;
-  let entry = props.entry;
-  let line = ["|---"];
-  for (var i = 0; i < string.length; i++){
-    if (string[i] != ""){
-      line.push(string[i]);
-    } else {
-      line.push('-');
-    }
-    line.push('---');
+  let entry = props.entry || "" ;
+  if (entry.toString().length == 1){
+    entry = entry + "----";
+  } else if (entry.toString().length == 2){
+    entry = entry + "---";
+  } else {
+    entry = "------";
   }
-  line.push(entry);
-  line.push('---|');
-  line.join('');
 
   return(
     <div className="App row">
@@ -25,8 +29,8 @@ const String  = props => {
             <input id={props.id} onChange={props.handleFormSubmit} type="text"/>
           </form>
       </div>
-      <div className='text columns small-11'>
-          {props.open} {line}
+      <div className='inline-block text columns small-11'>
+          {props.open}|---{notes}--{entry}---
       </div>
     </div>
   );

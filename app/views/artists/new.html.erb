@@ -1,0 +1,13 @@
+<h2>New Artist</h2>
+
+<%= form_for(@artist) do |f| %>
+  <div class="inline-block">
+    <div class="text">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+      <%= f.submit "Add Artist"%>
+
+</div>
+<% end %>

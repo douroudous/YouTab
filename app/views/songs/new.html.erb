@@ -1,0 +1,20 @@
+<h2>New Tab</h2>
+
+<%= form_for(@song) do |f| %>
+  <div class="inline-block">
+    <div class="text">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="text">
+      <%= f.label :artist_id %>
+      <%= f.collection_select(:artist_id, Artist.all, :id, :name ) %>
+    </div>
+
+
+
+      <%= f.submit "Add Tab"%>
+
+</div>
+<% end %>
