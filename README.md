@@ -1,3 +1,7 @@
+![Build Status](https://codeship.com/projects/5c41c090-c932-0134-4c4c-422f29a80ca3/status?branch=master)
+![Code Climate](https://codeclimate.com/github/douroudous/youtab.png)
+![Coverage Status](https://coveralls.io/repos/douroudous/youtab/badge.png)
+
 == README
 
 This README would normally document whatever steps are necessary to get the
