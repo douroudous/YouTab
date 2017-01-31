@@ -58,6 +58,7 @@ class Track extends React.Component {
             {strings}
           </ul>
           <button className="button" onClick={() => this.props.handleAdd(this.state.chord)}>Add</button><br/>
+          <button className="button" onClick={() => this.props.handleSave()}>Save</button><br/>
         </div>
       );
   }

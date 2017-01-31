@@ -1,16 +1,17 @@
 class Api::V1::SongsController < ApplicationController
-  #respond_to :json
-  #do i need this?
 
   def show
     @song = Song.find(params[:id])
-    render json: @song
+    render :json => { :title => @song.title,
+                      :artist => @song.artist.name,
+                      :tab => @song.tab.split(";") }
   end
 
   def update
     @song = Song.find(params[:id])
-    @song.update(params)
-    #add more?
+    @song.tab = JSON.parse(request.body.read)["tab"]
+    @song.save
+    render json: @song
   end
 
 end
