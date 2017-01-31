@@ -1,5 +1,5 @@
 import React from 'react';
-import Tab from './Tab';
+import Track from './Track';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class App extends React.Component {
 
     return(
       <div>
-        <Tab
+        <br/>
+        <Track
           strings={this.props}
           song={this.state.song}
           handleAdd={this.handleAdd}

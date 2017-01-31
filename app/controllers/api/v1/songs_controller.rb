@@ -1,5 +1,16 @@
 class Api::V1::SongsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+  #respond_to :json
+  #do i need this?
 
+  def show
+    @song = Song.find(params[:id])
+    render json: @song
+  end
+
+  def update
+    @song = Song.find(params[:id])
+    @song.update(params)
+    #add more?
+  end
 
 end

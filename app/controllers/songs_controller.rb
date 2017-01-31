@@ -58,7 +58,7 @@ class SongsController < ApplicationController
   def avg_rating(song)
     sum = song.reviews.sum("rating")
     count = song.reviews.length.to_f
-    (sum/count).round(2)
+    (sum/count).round(1)
   end
 
 end
