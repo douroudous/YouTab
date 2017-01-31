@@ -1,8 +1,12 @@
 h1, h2, h3 {
-    text-align: center;
-    font-family: "Georgia";
-    color: #016CAA;
-    font-weight: 900;
+  text-align: center;
+  font-family: "Georgia";
+  color: #016CAA;
+  font-weight: 900;
+}
+
+h3 {
+  font-size: 25px;
 }
 
 nav, form{
@@ -26,7 +30,11 @@ nav, form{
 
 .column-labels {
   font-weight: 900;
+}
 
+.optional-field:before {
+  content: "\00a0";
+  font-size: 0;
 }
 
 .inline-block {

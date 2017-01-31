@@ -1,7 +1,7 @@
 import React from 'react';
 import String from './String';
 
-class Tab extends React.Component {
+class Track extends React.Component {
   constructor(props) {
     super(props);
     this.state={
@@ -54,14 +54,14 @@ class Tab extends React.Component {
 
       return (
         <div className="page">
-          <h1>YouTab</h1>
           <ul>
             {strings}
           </ul>
           <button className="button" onClick={() => this.props.handleAdd(this.state.chord)}>Add</button><br/>
+          <button className="button" onClick={() => this.props.handleSave()}>Save</button><br/>
         </div>
       );
   }
 }
 
-export default Tab;
+export default Track;

@@ -2,10 +2,6 @@ import React from 'react';
 
 const Note  = props => {
 
-  /*
-  each note:
-  spaces
-  */
   let note = "---";
   if (props.note.length == 1){
     note = note + props.note + "--";
