@@ -1,32 +1,31 @@
 ![Build Status](https://codeship.com/projects/5c41c090-c932-0134-4c4c-422f29a80ca3/status?branch=master)
 [![Code Climate](https://codeclimate.com/github/douroudous/YouTab/badges/gpa.svg)](https://codeclimate.com/github/douroudous/YouTab)
 ![Coverage Status](https://coveralls.io/repos/douroudous/youtab/badge.png)
+[![Coverage Status](https://coveralls.io/repos/github/douroudous/youtab/badge.svg?branch=master)](https://coveralls.io/github/douroudous/youtab?branch=master)
 
-== README
+# SoleMate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Heroku Link: https://youtab.herokuapp.com/
 
-* Ruby version
+## Author
+* Dino Dourountoudakis (https://github.com/douroudous)
 
-* System dependencies
+## Technologies
 
-* Configuration
+* Ruby on Rails
+* ReactJS
+* PostgreSQL
+* CarrierWave
+* Devise
 
-* Database creation
+## Local Setup
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```
+git clone https://github.com/douroudous/YouTab.git
+cd youtab
+bundle install
+npm install
+rake db:create && rake db:migrate && rake db:seed
+```

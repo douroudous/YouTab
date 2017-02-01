@@ -41,7 +41,7 @@ nav, form{
   display: inline-block;
 }
 
-.notice {
+.notice, .entry{
   color: red;
   font-weight: bold;
 }

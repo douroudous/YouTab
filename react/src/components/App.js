@@ -72,6 +72,7 @@ class App extends React.Component {
     return(
       <div>
         <h3>{this.state.title} - {this.state.artist}</h3>
+        <br/>
         <Track
           strings={this.props}
           song={this.state.song}

@@ -19,9 +19,7 @@ const String  = props => {
   }
   if (entry.toString().length == 1){
     entry = entry + "-";
-  } else if (entry.toString().length == 2){
-    entry = entry;
-  } else {
+  } else if (entry.toString().length != 2){
     entry = "--";
   }
 
@@ -33,7 +31,12 @@ const String  = props => {
           </form>
       </div>
       <div className='inline-block text columns small-11'>
-          {props.open}|---{notes}---{entry}--
+        <div className='inline-block'>
+            {props.open}|---{notes}-
+        </div>
+        <div className='inline-block entry'>
+            --{entry}--
+        </div>
       </div>
     </div>
   );
