@@ -1,7 +1,11 @@
 class ArtistsController < ApplicationController
 
   def index
-    @artists = Artist.order(name: :asc)
+    if params[:search]
+      @artists = Artist.search(params[:search]).order("name asc")
+    else
+      @artists = Artist.all.order("name asc")
+    end
   end
 
   def show

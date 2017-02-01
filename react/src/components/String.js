@@ -13,13 +13,16 @@ const String  = props => {
     );
   });
 
-  let entry = props.entry || "" ;
+  let entry = props.entry;
+  if (isNaN(entry)) {
+    entry = "";
+  }
   if (entry.toString().length == 1){
-    entry = entry + "---";
+    entry = entry + "-";
   } else if (entry.toString().length == 2){
-    entry = entry + "--";
+    entry = entry;
   } else {
-    entry = "----";
+    entry = "--";
   }
 
   return(
@@ -30,7 +33,7 @@ const String  = props => {
           </form>
       </div>
       <div className='inline-block text columns small-11'>
-          {props.open}|---{notes}--{entry}--
+          {props.open}|---{notes}---{entry}--
       </div>
     </div>
   );

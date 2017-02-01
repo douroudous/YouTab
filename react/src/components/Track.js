@@ -15,7 +15,7 @@ class Track extends React.Component {
     let string = event.target.id;
     let fret = parseInt(event.target.value);
     let chord = this.state.chord;
-    if (fret){
+    if (!isNaN(fret)){
       chord[string] = fret;
     } else {
       chord[string] = "";
@@ -31,13 +31,15 @@ class Track extends React.Component {
       let stringNumber = string.id;
       let stringLine = [];
       let stringNote = {};
-      for (let note of song) {
-        note = note.split(',');
-        stringNote = {
-                  id: stringNumber,
-                  note: note[stringNumber]
-                };
-        stringLine.push(stringNote);
+      let note;
+      for (let i = 0; i < song.length; i++) {
+          note = song[i].split(',');
+          stringNote = {
+                        id: i,
+                        stringNumber: stringNumber,
+                        note: note[stringNumber]
+                     };
+          stringLine.push(stringNote);
       }
 
       return(

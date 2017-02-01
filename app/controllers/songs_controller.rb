@@ -1,7 +1,11 @@
 class SongsController < ApplicationController
 
   def index
-    @songs = Song.order(created_at: :asc)
+    if params[:search]
+      @songs = Song.search(params[:search]).order("created_at asc")
+    else
+      @songs = Song.all.order("created_at asc")
+    end
   end
 
   def show

@@ -7,7 +7,7 @@ const Note  = props => {
     note = note + props.note + "--";
   } else if (props.note.length == 2){
     note = note + props.note + "-";
-  } else if (props.note.length == ""){
+  } else if (props.note.length == 0){
     note = note + "---";
   }
 

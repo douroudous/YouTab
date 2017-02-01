@@ -1,6 +1,13 @@
 <h2>Tabs</h2>
 <h3><%= link_to "New Tab", new_song_path %></h3>
-</br>
+
+<%= form_tag(songs_path, :method => "get", id: "search-form") do %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Songs" %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 
 <p class="small-3 columns">Title</p>
 <p class="small-3 columns">Artist</p>

@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-<div class="bottom-button">
+<% if current_user.admin %>
   <p><%= link_to "Update Artist", edit_artist_path %></p>
   <p><%= link_to "Delete Artist", @artist, data: {:confirm => 'Are you sure you want to delete this artist?'}, method: :delete %></p>
-</div>
+<% end %>
