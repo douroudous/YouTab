@@ -1,7 +1,6 @@
 ![Build Status](https://codeship.com/projects/5c41c090-c932-0134-4c4c-422f29a80ca3/status?branch=master)
 [![Code Climate](https://codeclimate.com/github/douroudous/YouTab/badges/gpa.svg)](https://codeclimate.com/github/douroudous/YouTab)
-![Coverage Status](https://coveralls.io/repos/douroudous/youtab/badge.png)
-[![Coverage Status](https://coveralls.io/repos/github/douroudous/youtab/badge.svg?branch=master)](https://coveralls.io/github/douroudous/youtab?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/douroudous/YouTab/badge.svg?branch=master)](https://coveralls.io/github/douroudous/YouTab?branch=master)
 
 # SoleMate
 
