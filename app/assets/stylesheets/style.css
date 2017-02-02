@@ -49,3 +49,13 @@ nav, form{
 .add-review{
   padding-top: 30px;
 }
+
+#search {
+  height: 70px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #CDDCDE;
+  box-shadow: 5px 5px 2px grey;
+  width: 200px;
+}

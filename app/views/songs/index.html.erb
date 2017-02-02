@@ -4,7 +4,6 @@
 <%= form_tag(songs_path, :method => "get", id: "search-form") do %>
   <p>
     <%= text_field_tag :search, params[:search], placeholder: "Search Songs" %>
-    <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
 

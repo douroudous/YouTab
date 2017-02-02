@@ -1,16 +1,9 @@
 <h2>Artists</h2>
-
+<h3><%= link_to "New Artist", new_artist_path %></h3>
 
 <%= form_tag(artists_path, :method => "get", id: "search-form") do %>
-  <p>
     <%= text_field_tag :search, params[:search], placeholder: "Search Artists" %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
 <% end %>
-
-
-<h3><%= link_to "New Artist", new_artist_path %></h3>
-</br>
 
 <p class="small-3 columns">Title</p>
 <p class="small-3 columns"># of Tabs</p>
