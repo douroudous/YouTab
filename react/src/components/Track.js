@@ -4,10 +4,6 @@ import String from './String';
 class Track extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state={
-      // chord: new Array(this.props.strings.data.length)
-    };
   }
 
   render() {
@@ -18,9 +14,8 @@ class Track extends React.Component {
       let stringNumber = string.id;
       let stringLine = [];
       let stringNote = {};
-      let note;
       for (let i = 0; i < song.length; i++) {
-          note = song[i].split(',');
+          let note = song[i].split(',');
           stringNote = {
                         id: i,
                         stringNumber: stringNumber,
@@ -36,6 +31,7 @@ class Track extends React.Component {
           open={string.open}
           stringLine={stringLine}
           entry={this.props.chord[stringNumber]}
+          hidden={this.props.hidden}
           handleEnter={this.props.handleEnter}
         />
       );

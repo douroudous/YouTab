@@ -26,6 +26,7 @@ nav, form{
 
 .text {
   font-family: "Andale Mono";
+  font-size: 15px;
 }
 
 .column-labels {
@@ -44,6 +45,10 @@ nav, form{
 .notice, .entry{
   color: red;
   font-weight: bold;
+}
+
+.hidden{
+  visibility: hidden;
 }
 
 .add-review{

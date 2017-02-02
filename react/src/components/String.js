@@ -2,7 +2,6 @@ import React from 'react';
 import Note from './Note';
 
 const String  = props => {
-
   let notes = props.stringLine.map (note => {
     return(
       <Note
@@ -26,16 +25,20 @@ const String  = props => {
   return(
     <div className="App row">
       <div className='columns small-1'>
+        <div className={props.hidden}>
           <form className="form">
             <input id={props.id} onChange={props.handleEnter} type="text"/>
           </form>
+        </div>
       </div>
       <div className='text columns small-11'>
         <div className='inline-block'>
-            {props.open}|---{notes}-
+            {props.open}|-{notes}-
         </div>
         <div className='inline-block entry'>
+          <div className={props.hidden}>
             --{entry}--
+          </div>
         </div>
       </div>
     </div>

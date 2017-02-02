@@ -5,7 +5,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      width: 4,
       title: "",
       artist: "",
       song: "",
@@ -85,55 +84,32 @@ class App extends React.Component {
   }
 
   render() {
-    let width = this.state.width;
+    let width = this.props.width;
     let song = this.state.song;
-    let tracks = new Array(Math.ceil(song.length/width));
-    let trackNotes;
-    if (tracks.length > 0) {
-      for (let i = 0; i < tracks.length; i++) {
-        trackNotes = song.slice(i * width, (i + 1) * width);
-        tracks[i] =
-            <Track
-                  key = {i}
-                  id = {i}
-                  strings={this.props}
-                  song={trackNotes}
-                  chord={this.state.chord}
-                  handleEnter={this.handleEnter}
-                />
-
-      }
+    let tracks = [];
+    let trackNotes = [];
+    let hidden;
+    let trackCount = Math.ceil(song.length/width);
+    if (trackCount == 0) {
+      trackCount = 1;
     }
-
-    // let tracks = this.state.song.map (track => {
-    //
-    //   // let song = this.props.song;
-    //   // let stringNumber = string.id;
-    //   // let stringLine = [];
-    //   // let stringNote = {};
-    //   // let note;
-    //   // for (let i = 0; i < song.length; i++) {
-    //   //     note = song[i].split(',');
-    //   //     stringNote = {
-    //   //                   id: i,
-    //   //                   stringNumber: stringNumber,
-    //   //                   note: note[stringNumber]
-    //   //                };
-    //   //     stringLine.push(stringNote);
-    //   // }
-    //
-    //   return(
-    //     <Track
-    //       //come up with unique keys
-    //       //key = {stringNumber}
-    //       //id = {stringNumber}
-    //       strings={this.props}
-    //       song={this.state.song}
-    //       chord={this.state.chord}
-    //       handleEnter={this.handleEnter}
-    //     />
-    //   );
-    // });
+    for (let i = 0; i < trackCount; i++) {
+      hidden = "";
+      trackNotes = song.slice(i * width, (i + 1) * width);
+      if (i < trackCount - 1) {
+        hidden = 'hidden';
+      }
+      let track = <Track
+                    key = {i}
+                    id = {i}
+                    strings={this.props}
+                    song={trackNotes}
+                    chord={this.state.chord}
+                    hidden={hidden}
+                    handleEnter={this.handleEnter}
+                  />;
+      tracks.push(track);
+    }
 
     return(
       <div>
