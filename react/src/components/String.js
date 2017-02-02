@@ -27,10 +27,10 @@ const String  = props => {
     <div className="App row">
       <div className='columns small-1'>
           <form className="form">
-            <input id={props.id} onChange={props.handleFormSubmit} type="text"/>
+            <input id={props.id} onChange={props.handleEnter} type="text"/>
           </form>
       </div>
-      <div className='inline-block text columns small-11'>
+      <div className='text columns small-11'>
         <div className='inline-block'>
             {props.open}|---{notes}-
         </div>

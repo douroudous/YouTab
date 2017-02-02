@@ -4,23 +4,10 @@ import String from './String';
 class Track extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      chord: new Array(this.props.strings.data.length)
-    };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
-    let string = event.target.id;
-    let fret = parseInt(event.target.value);
-    let chord = this.state.chord;
-    if (!isNaN(fret)){
-      chord[string] = fret;
-    } else {
-      chord[string] = "";
-    }
-    this.setState({ chord: chord});
+    this.state={
+      // chord: new Array(this.props.strings.data.length)
+    };
   }
 
   render() {
@@ -48,19 +35,19 @@ class Track extends React.Component {
           id = {stringNumber}
           open={string.open}
           stringLine={stringLine}
-          entry={this.state.chord[stringNumber]}
-          handleFormSubmit={this.handleFormSubmit}
+          entry={this.props.chord[stringNumber]}
+          handleEnter={this.props.handleEnter}
         />
       );
     });
 
+
       return (
         <div className="page">
+          <br/>
           <ul>
             {strings}
           </ul>
-          <button className="button" onClick={() => this.props.handleAdd(this.state.chord)}>Add</button><br/>
-          <button className="button" onClick={() => this.props.handleSave()}>Save</button><br/>
         </div>
       );
   }
