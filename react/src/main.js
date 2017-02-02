@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import AppView from './components/AppView';
 import data from './constants/data';
 
 $(function() {
@@ -20,8 +21,7 @@ $(function() {
   if (view) {
     ReactDOM.render(
       <div>
-      <p>VIEW</p>
-      <App
+      <AppView
         data={data}
         songId={parseInt(view.dataset.id)}
         width={15}
