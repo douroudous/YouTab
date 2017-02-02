@@ -6,6 +6,11 @@ class Track extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.handleClear();
+  }
+
+
   render() {
 
     let strings = this.props.strings.data.map (string => {
@@ -33,6 +38,7 @@ class Track extends React.Component {
           entry={this.props.chord[stringNumber]}
           hidden={this.props.hidden}
           handleEnter={this.props.handleEnter}
+          handleClear={this.props.handleClear}
         />
       );
     });

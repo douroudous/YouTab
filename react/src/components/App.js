@@ -11,11 +11,12 @@ class App extends React.Component {
       chord: new Array(this.props.data.length)
     };
     this.handleEnter = this.handleEnter.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch(`/api/v1/songs/${this.props.songId}.json`,
       { method: 'get',
         credentials: 'include'
@@ -43,12 +44,19 @@ class App extends React.Component {
     let string = event.target.id;
     let fret = parseInt(event.target.value);
     let chord = this.state.chord;
-    if (!isNaN(fret)){
+    if (!isNaN(fret) && fret < 26){
       chord[string] = fret;
     } else {
       chord[string] = "";
     }
     this.setState({ chord: chord});
+  }
+
+  handleClear() {
+    $('form').each(function() {
+      this.reset();
+    });
+    this.setState({ chord: new Array(this.props.data.length)});
   }
 
   handleAdd() {
@@ -99,6 +107,10 @@ class App extends React.Component {
       if (i < trackCount - 1) {
         hidden = 'hidden';
       }
+      // when a new Track begins, clear entry when there are no notes on track yet
+      // wont be able to do it by checking where i am
+      // check notes.length
+      // but add other logic to clear the chord
       let track = <Track
                     key = {i}
                     id = {i}
@@ -107,6 +119,7 @@ class App extends React.Component {
                     chord={this.state.chord}
                     hidden={hidden}
                     handleEnter={this.handleEnter}
+                    handleClear={this.handleClear}
                   />;
       tracks.push(track);
     }
@@ -118,8 +131,11 @@ class App extends React.Component {
         <ul>
           {tracks}
         </ul>
+        <ul>
         <button className="button" onClick={() => this.handleAdd()}>Add</button><br/>
+        <button className="button" onClick={() => this.handleClear()}>Clear</button><br/>
         <button className="button" onClick={() => this.handleSave()}>Save</button><br/>
+        </ul>
       </div>
     );
   }
