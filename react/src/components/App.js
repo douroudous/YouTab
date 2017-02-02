@@ -107,10 +107,6 @@ class App extends React.Component {
       if (i < trackCount - 1) {
         hidden = 'hidden';
       }
-      // when a new Track begins, clear entry when there are no notes on track yet
-      // wont be able to do it by checking where i am
-      // check notes.length
-      // but add other logic to clear the chord
       let track = <Track
                     key = {i}
                     id = {i}
