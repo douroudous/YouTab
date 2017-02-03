@@ -1,4 +1,4 @@
-<div  class="animated rotateIn">
+<div class="animated fadeIn">
   <h2> <%= @user.username %> </h2>
   <h3> Joined: <%= @user.created_at.strftime("%Y-%m-%d") %> </h3>
   <% if @user.id == current_user.id %>

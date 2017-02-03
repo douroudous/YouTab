@@ -53,7 +53,11 @@ class App extends React.Component {
     let editStringId= event.target.dataset.string;
     let editTrackId= event.target.dataset.track;
     let chordArray = this.state.song[editNoteId].split(",");
-    document.getElementsByClassName("edit-box")[0].value = editNote;
+    if (editNote != "-") {
+      document.getElementsByClassName("edit-box")[0].value = editNote;
+    } else {
+      document.getElementsByClassName("edit-box")[0].value = "";
+    }
     this.setState({ editTrackId: editTrackId,
                     editStringId: editStringId,
                     editNoteId: editNoteId,
@@ -62,13 +66,33 @@ class App extends React.Component {
   }
 
   handleEdit(event) {
-    let song;
-    this.setState({ song: song});
+    let song = this.state.song;
+    let newNote = document.getElementsByClassName("edit-box")[0].value;
+    let chordArray = song[this.state.editNoteId].split(",");
+    chordArray[this.state.editStringId] = newNote;
+    chordArray = chordArray.join();
+    song[this.state.editNoteId] = chordArray;
+    //debugger;
+    this.setState({ song: song,
+                    editTrackId: "",
+                    editStringId: "",
+                    editNoteId: "",
+                    editNote: "",
+                    editBox: "hidden"});
   }
 
   handleDelete(event) {
-    let song;
-    this.setState({ song: song});
+    let song = this.state.song;
+    let chordArray = song[this.state.editNoteId].split(",");
+    chordArray[this.state.editStringId] = "";
+    chordArray = chordArray.join();
+    song[this.state.editNoteId] = chordArray;
+    this.setState({ song: song,
+                    editTrackId: "",
+                    editStringId: "",
+                    editNoteId: "",
+                    editNote: "",
+                    editBox: "hidden"});
   }
 
   handleEnter(event) {

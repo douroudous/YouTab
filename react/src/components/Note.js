@@ -19,7 +19,7 @@ const Note  = props => {
         if (parseInt(props.editStringId) == props.stringId) {
           selectedNoteClass = "animated fadeIn selected";
         } else if (note != "-") {
-          selectedNoteClass = "selected-chord";
+          selectedNoteClass = "animated fadeIn selected-chord";
         }
   }
 
