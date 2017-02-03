@@ -12,7 +12,7 @@ $(function() {
       <App
         data={data}
         songId={parseInt(edit.dataset.id)}
-        width={15}
+        width={10}
       />,
       edit
     );

@@ -37,8 +37,13 @@ class Track extends React.Component {
           stringLine={stringLine}
           entry={this.props.chord[stringNumber]}
           hidden={this.props.hidden}
+          trackId = {this.props.id}
+          editTrackId={this.props.editTrackId}
+          editStringId={this.props.editStringId}
+          editNoteId={this.props.editNoteId}
           handleEnter={this.props.handleEnter}
           handleClear={this.props.handleClear}
+          handleSelect={this.props.handleSelect}
         />
       );
     });

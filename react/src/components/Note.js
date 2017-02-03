@@ -2,20 +2,34 @@ import React from 'react';
 
 const Note  = props => {
 
-  let note = "---";
-  if (props.note.length == 1){
-    note = note + props.note + "--";
-  } else if (props.note.length == 2){
-    note = note + props.note + "-";
-  } else if (props.note.length == 0){
-    note = note + "---";
+  let note = props.note;
+  let noteBuffer;
+  if (note.length == 1){
+    noteBuffer = "--";
+  } else if (note.length == 2){
+    noteBuffer = "-";
+  } else if (note.length == 0){
+    note = "-";
+    noteBuffer = "--";
+  }
+
+  let selectedNoteClass = "";
+  if ((parseInt(props.editTrackId) == props.trackId) &&
+      (parseInt(props.editNoteId) == props.id)){
+        if (parseInt(props.editStringId) == props.stringId) {
+          selectedNoteClass = "animated fadeIn selected";
+        } else if (note != "-") {
+          selectedNoteClass = "animated fadeIn selected-chord";
+        }
   }
 
   return(
-    <div className='inline-block'>
-      <p className='text'>
+    <div className='inline-block text'>
+      <span>---</span>
+      <span className={selectedNoteClass} id={props.id} data-track={props.trackId} data-string={props.stringId} onClick={props.handleSelect}>
         {note}
-      </p>
+      </span>
+      <span>{noteBuffer}</span>
     </div>
   );
 };

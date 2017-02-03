@@ -8,9 +8,17 @@ class App extends React.Component {
       title: "",
       artist: "",
       song: "",
-      chord: new Array(this.props.data.length)
+      chord: new Array(this.props.data.length),
+      editTrackId: "",
+      editStringId: "",
+      editNoteId: "",
+      editNote: "",
+      editBox: "hidden"
     };
     this.handleEnter = this.handleEnter.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -32,11 +40,66 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({title: body.title});
-        this.setState({artist: body.artist});
-        this.setState({song: body.tab});
+        this.setState({ title: body.title,
+                        artist: body.artist,
+                        song: body.tab});
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleSelect(event) {
+    let editNoteId = event.target.id;
+    let editNote = event.target.innerHTML;
+    let editStringId= event.target.dataset.string;
+    let editTrackId= event.target.dataset.track;
+    let chordArray = this.state.song[editNoteId].split(",");
+    if (editNote != "-") {
+      document.getElementsByClassName("edit-box")[0].value = editNote;
+    } else {
+      document.getElementsByClassName("edit-box")[0].value = "";
+    }
+    this.setState({ editTrackId: editTrackId,
+                    editStringId: editStringId,
+                    editNoteId: editNoteId,
+                    editNote: editNote,
+                    editBox: ""});
+  }
+
+  handleEdit(event) {
+    let song = this.state.song;
+    let editNoteId = parseInt(this.state.editNoteId);
+    let editStringId = parseInt(this.state.editStringId);
+    let editTrackId = parseInt(this.state.editTrackId);
+    let newNote = document.getElementsByClassName("edit-box")[0].value;
+    let chordLocation = editNoteId + (editTrackId * this.props.width);
+    let chordArray = song[chordLocation].split(",");
+    chordArray[editStringId] = newNote;
+    chordArray = chordArray.join();
+    song[chordLocation] = chordArray;
+    this.setState({ song: song,
+                    editTrackId: "",
+                    editStringId: "",
+                    editNoteId: "",
+                    editNote: "",
+                    editBox: "hidden"});
+  }
+
+  handleDelete(event) {
+    let song = this.state.song;
+    let editNoteId = parseInt(this.state.editNoteId);
+    let editStringId = parseInt(this.state.editStringId);
+    let editTrackId = parseInt(this.state.editTrackId);
+    let chordLocation = editNoteId + (editTrackId * this.props.width);
+    let chordArray = song[chordLocation].split(",");
+    chordArray[editStringId] = "";
+    chordArray = chordArray.join();
+    song[chordLocation] = chordArray;
+    this.setState({ song: song,
+                    editTrackId: "",
+                    editStringId: "",
+                    editNoteId: "",
+                    editNote: "",
+                    editBox: "hidden"});
   }
 
   handleEnter(event) {
@@ -114,24 +177,33 @@ class App extends React.Component {
                     song={trackNotes}
                     chord={this.state.chord}
                     hidden={hidden}
+                    editTrackId={this.state.editTrackId}
+                    editStringId={this.state.editStringId}
+                    editNoteId={this.state.editNoteId}
                     handleEnter={this.handleEnter}
                     handleClear={this.handleClear}
+                    handleSelect={this.handleSelect}
                   />;
       tracks.push(track);
     }
 
     return(
-      <div>
+      <div className="animated fadeIn">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
         <ul>
           {tracks}
         </ul>
-        <ul>
-        <button className="button" onClick={() => this.handleAdd()}>Add</button><br/>
-        <button className="button" onClick={() => this.handleClear()}>Clear</button><br/>
-        <button className="button" onClick={() => this.handleSave()}>Save</button><br/>
-        </ul>
+        <button className="button columns small-2" onClick={() => this.handleAdd()}>Add</button>
+        <button className="button columns small-2" onClick={() => this.handleClear()}>Clear</button>
+        <button className="button columns small-2" onClick={() => this.handleSave()}>Save</button>
+        <div className={this.state.editBox}>
+          <form className='columns small-2'>
+            <input className='edit-box' type="text"/>
+          </form>
+          <button className="button columns small-2" onClick={() => this.handleEdit()}>Edit</button>
+          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete</button>
+        </div>
       </div>
     );
   }
