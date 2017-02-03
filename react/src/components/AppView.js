@@ -56,7 +56,7 @@ class AppView extends React.Component {
     }
 
     return(
-      <div>
+      <div className="animated fadeIn">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
         <ul>

@@ -9,16 +9,24 @@ const Note  = props => {
   } else if (note.length == 2){
     noteBuffer = "-";
   } else if (note.length == 0){
-    noteBuffer = "---";
+    note = "-";
+    noteBuffer = "--";
+  }
+
+  let selectedNoteClass = "";
+  if( (parseInt(props.editTrackId) == props.trackId) &&
+      (parseInt(props.editStringId) == props.stringId) &&
+      (parseInt(props.editNoteId) == props.id)){
+        selectedNoteClass = "animated fadeIn entry";
   }
 
   return(
-    <div className='inline-block'>
-      <span className='text'>---</span>
-      <span className='text' id={props.id} value={props.stringId} onClick={props.handleSelect}>
+    <div className='inline-block text'>
+      <span>---</span>
+      <span className={selectedNoteClass} id={props.id} data-track={props.trackId} data-string={props.stringId} onClick={props.handleSelect}>
         {note}
       </span>
-      <span className='text'>{noteBuffer}</span>
+      <span>{noteBuffer}</span>
     </div>
   );
 };

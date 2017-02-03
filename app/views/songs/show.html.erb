@@ -1,6 +1,9 @@
-<h2> <%= @song.title %> </h2>
-<h3> <%= link_to @song.artist.name, @song.artist %> </h3>
-<h3> <%= link_to @song.user.username, @song.user %> </h3>
+<div  class="animated fadeInDown">
+  <h2> <%= @song.title %> </h2>
+  <h3> <%= link_to @song.artist.name, @song.artist %> </h3>
+  <h3> <%= link_to @song.user.username, @song.user %> </h3>
+</div>
+
 <% if !@avg_rating.nan? %>
   <h3> <%= @avg_rating %> stars</h3>
 <% end %>

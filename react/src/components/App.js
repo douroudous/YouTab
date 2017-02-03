@@ -9,6 +9,7 @@ class App extends React.Component {
       artist: "",
       song: "",
       chord: new Array(this.props.data.length),
+      editTrackId: "",
       editStringId: "",
       editNoteId: "",
       editNote: "",
@@ -16,6 +17,8 @@ class App extends React.Component {
     };
     this.handleEnter = this.handleEnter.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -47,19 +50,25 @@ class App extends React.Component {
   handleSelect(event) {
     let editNoteId = event.target.id;
     let editNote = event.target.innerHTML;
-    let editStringId = event.target.attributes.value.value;
+    let editStringId= event.target.dataset.string;
+    let editTrackId= event.target.dataset.track;
     let chordArray = this.state.song[editNoteId].split(",");
     document.getElementsByClassName("edit-box")[0].value = editNote;
-    this.setState({ editStringId: editStringId,
+    this.setState({ editTrackId: editTrackId,
+                    editStringId: editStringId,
                     editNoteId: editNoteId,
                     editNote: editNote,
                     editBox: ""});
+  }
 
-    // this handler will only make a box pop up with the note we're editing
-    // also will highlight note we're editing
-    // eventually will create another handler update song
-    // this.setState({ song: song});
+  handleEdit(event) {
+    let song;
+    this.setState({ song: song});
+  }
 
+  handleDelete(event) {
+    let song;
+    this.setState({ song: song});
   }
 
   handleEnter(event) {
@@ -137,6 +146,9 @@ class App extends React.Component {
                     song={trackNotes}
                     chord={this.state.chord}
                     hidden={hidden}
+                    editTrackId={this.state.editTrackId}
+                    editStringId={this.state.editStringId}
+                    editNoteId={this.state.editNoteId}
                     handleEnter={this.handleEnter}
                     handleClear={this.handleClear}
                     handleSelect={this.handleSelect}
@@ -145,7 +157,7 @@ class App extends React.Component {
     }
 
     return(
-      <div>
+      <div className="animated fadeIn">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
         <ul>
@@ -156,8 +168,10 @@ class App extends React.Component {
         <button className="button columns small-2" onClick={() => this.handleSave()}>Save</button>
         <div className={this.state.editBox}>
           <form className='columns small-2'>
-            <input className='edit-box' id={this.props.id} onChange={this.props.handleEnter} type="text"/>
+            <input className='edit-box' type="text"/>
           </form>
+          <button className="button columns small-2" onClick={() => this.handleEdit()}>Edit Note</button>
+          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete Note</button>
         </div>
       </div>
     );

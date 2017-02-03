@@ -14,6 +14,10 @@ class String extends React.Component {
           id = {note.id}
           stringId = {this.props.id}
           note = {note.note}
+          trackId = {this.props.trackId}
+          editTrackId={this.props.editTrackId}
+          editStringId={this.props.editStringId}
+          editNoteId={this.props.editNoteId}
           handleSelect={this.props.handleSelect}
         />
       );
