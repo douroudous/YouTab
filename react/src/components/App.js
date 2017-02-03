@@ -19,6 +19,8 @@ class App extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleInsert = this.handleInsert.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -94,6 +96,34 @@ class App extends React.Component {
     chordArray[editStringId] = "";
     chordArray = chordArray.join();
     song[chordLocation] = chordArray;
+    this.setState({ song: song,
+                    editTrackId: "",
+                    editStringId: "",
+                    editNoteId: "",
+                    editNote: "",
+                    editBox: "hidden"});
+  }
+
+  handleInsert(event) {
+    let song = this.state.song;
+    let editNoteId = parseInt(this.state.editNoteId);
+    let editTrackId = parseInt(this.state.editTrackId);
+    let chordLocation = editNoteId + (editTrackId * this.props.width);
+    song.splice(chordLocation + 1, 0, ",,,,,");
+    this.setState({ song: song,
+                    editTrackId: "",
+                    editStringId: "",
+                    editNoteId: "",
+                    editNote: "",
+                    editBox: "hidden"});
+  }
+
+  handleRemove(event) {
+    let song = this.state.song;
+    let editNoteId = parseInt(this.state.editNoteId);
+    let editTrackId = parseInt(this.state.editTrackId);
+    let chordLocation = editNoteId + (editTrackId * this.props.width);
+    song.splice(chordLocation, 1);
     this.setState({ song: song,
                     editTrackId: "",
                     editStringId: "",
@@ -201,8 +231,10 @@ class App extends React.Component {
           <form className='columns small-2'>
             <input className='edit-box' type="text"/>
           </form>
-          <button className="button columns small-2" onClick={() => this.handleEdit()}>Edit</button>
-          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete</button>
+          <button className="button columns small-1" onClick={() => this.handleEdit()}>Edit</button>
+          <button className="button columns small-1" onClick={() => this.handleDelete()}>Delete</button>
+          <button className="button columns small-1" onClick={() => this.handleInsert()}>Insert</button>
+          <button className="button columns small-1" onClick={() => this.handleRemove()}>Remove</button>
         </div>
       </div>
     );
