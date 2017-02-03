@@ -2,20 +2,23 @@ import React from 'react';
 
 const Note  = props => {
 
-  let note = "---";
-  if (props.note.length == 1){
-    note = note + props.note + "--";
-  } else if (props.note.length == 2){
-    note = note + props.note + "-";
-  } else if (props.note.length == 0){
-    note = note + "---";
+  let note = props.note;
+  let noteBuffer;
+  if (note.length == 1){
+    noteBuffer = "--";
+  } else if (note.length == 2){
+    noteBuffer = "-";
+  } else if (note.length == 0){
+    noteBuffer = "---";
   }
 
   return(
     <div className='inline-block'>
-      <p className='text'>
+      <span className='text'>---</span>
+      <span className='text' id={props.id} value={props.stringId} onClick={props.handleSelect}>
         {note}
-      </p>
+      </span>
+      <span className='text'>{noteBuffer}</span>
     </div>
   );
 };

@@ -8,9 +8,14 @@ class App extends React.Component {
       title: "",
       artist: "",
       song: "",
-      chord: new Array(this.props.data.length)
+      chord: new Array(this.props.data.length),
+      editStringId: "",
+      editNoteId: "",
+      editNote: "",
+      editBox: "hidden"
     };
     this.handleEnter = this.handleEnter.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -32,11 +37,29 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({title: body.title});
-        this.setState({artist: body.artist});
-        this.setState({song: body.tab});
+        this.setState({ title: body.title,
+                        artist: body.artist,
+                        song: body.tab});
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleSelect(event) {
+    let editNoteId = event.target.id;
+    let editNote = event.target.innerHTML;
+    let editStringId = event.target.attributes.value.value;
+    let chordArray = this.state.song[editNoteId].split(",");
+    document.getElementsByClassName("edit-box")[0].value = editNote;
+    this.setState({ editStringId: editStringId,
+                    editNoteId: editNoteId,
+                    editNote: editNote,
+                    editBox: ""});
+
+    // this handler will only make a box pop up with the note we're editing
+    // also will highlight note we're editing
+    // eventually will create another handler update song
+    // this.setState({ song: song});
+
   }
 
   handleEnter(event) {
@@ -116,6 +139,7 @@ class App extends React.Component {
                     hidden={hidden}
                     handleEnter={this.handleEnter}
                     handleClear={this.handleClear}
+                    handleSelect={this.handleSelect}
                   />;
       tracks.push(track);
     }
@@ -127,11 +151,14 @@ class App extends React.Component {
         <ul>
           {tracks}
         </ul>
-        <ul>
-        <button className="button" onClick={() => this.handleAdd()}>Add</button><br/>
-        <button className="button" onClick={() => this.handleClear()}>Clear</button><br/>
-        <button className="button" onClick={() => this.handleSave()}>Save</button><br/>
-        </ul>
+        <button className="button columns small-2" onClick={() => this.handleAdd()}>Add</button>
+        <button className="button columns small-2" onClick={() => this.handleClear()}>Clear</button>
+        <button className="button columns small-2" onClick={() => this.handleSave()}>Save</button>
+        <div className={this.state.editBox}>
+          <form className='columns small-2'>
+            <input className='edit-box' id={this.props.id} onChange={this.props.handleEnter} type="text"/>
+          </form>
+        </div>
       </div>
     );
   }

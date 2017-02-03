@@ -39,6 +39,7 @@ class Track extends React.Component {
           hidden={this.props.hidden}
           handleEnter={this.props.handleEnter}
           handleClear={this.props.handleClear}
+          handleSelect={this.props.handleSelect}
         />
       );
     });

@@ -2,7 +2,6 @@ import React from 'react';
 import Note from './Note';
 
 class String extends React.Component {
-  // make stateless if not needing state later
   constructor(props) {
     super(props);
   }
@@ -13,7 +12,9 @@ class String extends React.Component {
         <Note
           key = {note.id}
           id = {note.id}
+          stringId = {this.props.id}
           note = {note.note}
+          handleSelect={this.props.handleSelect}
         />
       );
     });
