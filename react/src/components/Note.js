@@ -14,10 +14,13 @@ const Note  = props => {
   }
 
   let selectedNoteClass = "";
-  if( (parseInt(props.editTrackId) == props.trackId) &&
-      (parseInt(props.editStringId) == props.stringId) &&
+  if ((parseInt(props.editTrackId) == props.trackId) &&
       (parseInt(props.editNoteId) == props.id)){
-        selectedNoteClass = "animated fadeIn entry";
+        if (parseInt(props.editStringId) == props.stringId) {
+          selectedNoteClass = "animated fadeIn selected";
+        } else if (note != "-") {
+          selectedNoteClass = "selected-chord";
+        }
   }
 
   return(

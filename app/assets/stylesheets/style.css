@@ -42,9 +42,13 @@ nav, form{
   display: inline-block;
 }
 
-.notice, .entry{
+.notice, .entry, .selected{
   color: red;
   font-weight: bold;
+}
+
+.selected-chord{
+  color: blue;
 }
 
 .hidden{
