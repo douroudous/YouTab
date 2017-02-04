@@ -39,18 +39,16 @@ class App extends React.Component {
       .then(response => response.json())
       .then(body => {
         let song = body.tab;
-        if (song.length == 0) {
-          song = Array(this.props.width).fill(",,,,,")
-        }
+        let extra = this.props.width - (song.length % this.props.width);
+        song = song.concat(Array(extra).fill(",,,,,"))
+        // also remove extra blank notes if there are more than a lines worth at the end
+
         this.setState({ title: body.title,
                         artist: body.artist,
                         song: song});
-      })
+                      })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
-
-
-
 
   handleSelect(event) {
     let editNoteId = event.target.id;
@@ -113,6 +111,8 @@ class App extends React.Component {
    let editTrackId = parseInt(this.state.editTrackId);
    let chordLocation = editNoteId + (editTrackId * this.props.width);
    song.splice(chordLocation + 1, 0, ",,,,,");
+   let extra = this.props.width - (song.length % this.props.width);
+   song = song.concat(Array(extra).fill(",,,,,"))
    this.setState({ song: song,
                    editTrackId: "",
                    editStringId: "",
@@ -127,6 +127,7 @@ class App extends React.Component {
    let editTrackId = parseInt(this.state.editTrackId);
    let chordLocation = editNoteId + (editTrackId * this.props.width);
    song.splice(chordLocation, 1);
+   // also remove extra blank notes if there are more than a lines worth at the end
    this.setState({ song: song,
                    editTrackId: "",
                    editStringId: "",
