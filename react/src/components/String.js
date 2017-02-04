@@ -23,34 +23,11 @@ class String extends React.Component {
       );
     });
 
-    let entry = this.props.entry;
-    if (isNaN(entry)) {
-      entry = "";
-    }
-
-    if (entry.toString().length == 1){
-      entry = entry + "-";
-    } else if (entry.toString().length != 2){
-      entry = "--";
-    }
-
     return(
       <div className="App row">
-        <div className='columns small-1'>
-          <div className={this.props.hidden}>
-            <form className="form">
-              <input id={this.props.id} onChange={this.props.handleEnter} type="text"/>
-            </form>
-          </div>
-        </div>
-        <div className='text columns small-11'>
+        <div className='text'>
           <div className='inline-block'>
-              {this.props.open}|-{notes}-
-          </div>
-          <div className='inline-block entry'>
-            <div className={this.props.hidden}>
-              --{entry}--
-            </div>
+              {this.props.open}|--{notes}
           </div>
         </div>
       </div>

@@ -18,14 +18,13 @@ const Note  = props => {
       (parseInt(props.editNoteId) == props.id)){
         if (parseInt(props.editStringId) == props.stringId) {
           selectedNoteClass = "animated fadeIn selected";
-        } else if (note != "-") {
+        } else {
           selectedNoteClass = "animated fadeIn selected-chord";
         }
   }
 
   return(
     <div className='inline-block text'>
-      <span>---</span>
       <span className={selectedNoteClass} id={props.id} data-track={props.trackId} data-string={props.stringId} onClick={props.handleSelect}>
         {note}
       </span>
