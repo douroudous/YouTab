@@ -8,14 +8,12 @@ class App extends React.Component {
       title: "",
       artist: "",
       song: "",
-      chord: new Array(this.props.data.length),
       editTrackId: "",
       editStringId: "",
       editNoteId: "",
       editNote: "",
       editBox: "hidden"
     };
-    this.handleEnter = this.handleEnter.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -24,6 +22,9 @@ class App extends React.Component {
     this.handleClear = this.handleClear.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleInsertLine = this.handleInsertLine.bind(this);
+    this.handleInsertMeasure = this.handleInsertMeasure.bind(this);
+    this.handleRemoveBlanks = this.handleRemoveBlanks.bind(this);
   }
 
   componentWillMount() {
@@ -42,10 +43,13 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(body => {
+        let song = body.tab;
+        let extra = this.props.width - (song.length % this.props.width);
+        song = song.concat(Array(extra).fill(",,,,,"))
         this.setState({ title: body.title,
                         artist: body.artist,
-                        song: body.tab});
-      })
+                        song: song});
+                      })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -55,10 +59,11 @@ class App extends React.Component {
     let editStringId= event.target.dataset.string;
     let editTrackId= event.target.dataset.track;
     let chordArray = this.state.song[editNoteId].split(",");
+    let editBox = document.getElementsByClassName("edit-box")[0];
     if (editNote != "-") {
-      document.getElementsByClassName("edit-box")[0].value = editNote;
+      editBox.value = editNote;
     } else {
-      document.getElementsByClassName("edit-box")[0].value = "";
+      editBox.value = "";
     }
     this.setState({ editTrackId: editTrackId,
                     editStringId: editStringId,
@@ -78,15 +83,19 @@ class App extends React.Component {
     chordArray[editStringId] = newNote;
     chordArray = chordArray.join();
     song[chordLocation] = chordArray;
+    if (editNoteId == this.props.width - 1) {
+      editTrackId += 1;
+      editNoteId = 0;
+    } else {
+      editNoteId += 1;
+    }
     this.setState({ song: song,
-                    editTrackId: "",
-                    editStringId: "",
-                    editNoteId: "",
-                    editNote: "",
-                    editBox: "hidden"});
+                    editTrackId: editTrackId,
+                    editNoteId: editNoteId,
+                    editNote: ""});
   }
 
-  handleDelete(event) {
+  handleDelete() {
     let song = this.state.song;
     let editNoteId = parseInt(this.state.editNoteId);
     let editStringId = parseInt(this.state.editStringId);
@@ -104,60 +113,87 @@ class App extends React.Component {
                     editBox: "hidden"});
   }
 
-  handleInsert(event) {
-    let song = this.state.song;
-    let editNoteId = parseInt(this.state.editNoteId);
-    let editTrackId = parseInt(this.state.editTrackId);
-    let chordLocation = editNoteId + (editTrackId * this.props.width);
-    song.splice(chordLocation + 1, 0, ",,,,,");
-    this.setState({ song: song,
-                    editTrackId: "",
-                    editStringId: "",
-                    editNoteId: "",
-                    editNote: "",
-                    editBox: "hidden"});
-  }
+  handleInsert() {
+   let song = this.state.song;
+   let editNoteId = parseInt(this.state.editNoteId);
+   let editTrackId = parseInt(this.state.editTrackId);
+   let chordLocation = editNoteId + (editTrackId * this.props.width);
+   song.splice(chordLocation + 1, 0, ",,,,,");
+   if (editNoteId == this.props.width - 1) {
+     editTrackId += 1;
+     editNoteId = 0;
+   } else {
+     editNoteId += 1;
+   }
+   this.setState({song: song,
+                  editTrackId: editTrackId,
+                  editNoteId: editNoteId,
+                  editNote: ""});
+ }
 
-  handleRemove(event) {
-    let song = this.state.song;
-    let editNoteId = parseInt(this.state.editNoteId);
-    let editTrackId = parseInt(this.state.editTrackId);
-    let chordLocation = editNoteId + (editTrackId * this.props.width);
-    song.splice(chordLocation, 1);
-    this.setState({ song: song,
-                    editTrackId: "",
-                    editStringId: "",
-                    editNoteId: "",
-                    editNote: "",
-                    editBox: "hidden"});
-  }
 
-  handleEnter(event) {
-    event.preventDefault();
-    let string = event.target.id;
-    let fret = parseInt(event.target.value);
-    let chord = this.state.chord;
-    if (!isNaN(fret) && fret < 26){
-      chord[string] = fret;
-    } else {
-      chord[string] = "";
-    }
-    this.setState({ chord: chord});
-  }
+ handleRemove(event) {
+   let song = this.state.song;
+   let editNoteId = parseInt(this.state.editNoteId);
+   let editTrackId = parseInt(this.state.editTrackId);
+   let chordLocation = editNoteId + (editTrackId * this.props.width);
+   song.splice(chordLocation, 1);
+   if (chordLocation == song.length) {
+     editNoteId -= 1;
+   }
+   this.setState({ song: song,
+                   editTrackId: editTrackId,
+                   editNoteId: editNoteId,
+                   editNote: ""});
+ }
 
-  handleClear() {
-    $('form').each(function() {
-      this.reset();
-    });
-    this.setState({ chord: new Array(this.props.data.length)});
+ handleInsertLine() {
+  let song = this.state.song;
+  let editNoteId = parseInt(this.state.editNoteId);
+  let editTrackId = parseInt(this.state.editTrackId);
+  let chordLocation;
+  if (isNaN(editNoteId)) {
+    chordLocation = song.length - 1;
+  } else {
+    chordLocation = editNoteId + (editTrackId * this.props.width);
   }
+  let newLine = Array(this.props.width).fill(",,,,,")
+  song = song.slice(0,chordLocation+1).concat(newLine).concat(song.slice(chordLocation+1));
+  this.setState({song: song,
+                 editTrackId: editTrackId,
+                 editNoteId: editNoteId,
+                 editNote: ""});
+}
 
-  handleAdd() {
-    let song = this.state.song;
-    let chord = this.state.chord;
-    song.push(chord.join(','));
-    this.setState({ song: song});
+handleInsertMeasure() {
+  let song = this.state.song;
+  let editNoteId = parseInt(this.state.editNoteId);
+  let editTrackId = parseInt(this.state.editTrackId);
+  let chordLocation = editNoteId + (editTrackId * this.props.width);
+  song.splice(chordLocation, 0, "|,|,|,|,|,|");
+  if (editNoteId == this.props.width - 1) {
+    editTrackId += 1;
+    editNoteId = 0;
+  } else {
+    editNoteId += 1;
   }
+  this.setState({song: song,
+                 editTrackId: editTrackId,
+                 editNoteId: editNoteId,
+                 editNote: ""});
+}
+
+ handleRemoveBlanks(event) {
+   let song = this.state.song;
+   for(let i = song.length - 1; i >= 0; i--){
+     if (song[i] == ",,,,,") {
+       song.splice(i,1);
+     } else {
+       break;
+     }
+   }
+   this.setState({ song: song });
+ }
 
   handleSave() {
     let data = {
@@ -187,6 +223,7 @@ class App extends React.Component {
   render() {
     let width = this.props.width;
     let song = this.state.song;
+
     let tracks = [];
     let trackNotes = [];
     let hidden;
@@ -205,13 +242,10 @@ class App extends React.Component {
                     id = {i}
                     strings={this.props}
                     song={trackNotes}
-                    chord={this.state.chord}
                     hidden={hidden}
                     editTrackId={this.state.editTrackId}
                     editStringId={this.state.editStringId}
                     editNoteId={this.state.editNoteId}
-                    handleEnter={this.handleEnter}
-                    handleClear={this.handleClear}
                     handleSelect={this.handleSelect}
                   />;
       tracks.push(track);
@@ -221,20 +255,26 @@ class App extends React.Component {
       <div className="animated fadeIn">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
+        <button className="button inline-block" onClick={() => this.handleSave()}>Save Tab</button>
+        <button className="button inline-block" onClick={() => this.handleRemoveBlanks()}>Delete Trailing Spaces</button>
+        <button className="button inline-block" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
+        <div className="inline-block">
+          <div className={this.state.editBox}>
+            <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure Line</button>
+          </div>
+        </div>
         <ul>
           {tracks}
         </ul>
-        <button className="button columns small-2" onClick={() => this.handleAdd()}>Add</button>
-        <button className="button columns small-2" onClick={() => this.handleClear()}>Clear</button>
-        <button className="button columns small-2" onClick={() => this.handleSave()}>Save</button>
         <div className={this.state.editBox}>
           <form className='columns small-2'>
             <input className='edit-box' type="text"/>
           </form>
-          <button className="button columns small-1" onClick={() => this.handleEdit()}>Edit</button>
-          <button className="button columns small-1" onClick={() => this.handleDelete()}>Delete</button>
-          <button className="button columns small-1" onClick={() => this.handleInsert()}>Insert</button>
-          <button className="button columns small-1" onClick={() => this.handleRemove()}>Remove</button>
+          <button className="button columns small-2" onClick={() => this.handleEdit()}>Add/Edit Note</button>
+          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete Note</button>
+          <button className="button columns small-2" onClick={() => this.handleInsert()}>Insert Space</button>
+          <button className="button columns small-2" onClick={() => this.handleRemove()}>Remove Notes/Space</button>
+
         </div>
       </div>
     );
