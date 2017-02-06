@@ -20,6 +20,11 @@ nav, form{
 .text {
   font-family: "Andale Mono";
   font-size: 15px;
+  color: black;
+}
+
+.grey {
+  color: #666666;
 }
 
 .column-labels {
@@ -42,6 +47,7 @@ nav, form{
 
 .selected-chord{
   color: blue;
+  font-weight: bold;
 }
 
 .hidden{

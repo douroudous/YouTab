@@ -150,7 +150,12 @@ class App extends React.Component {
   let song = this.state.song;
   let editNoteId = parseInt(this.state.editNoteId);
   let editTrackId = parseInt(this.state.editTrackId);
-  let chordLocation = editNoteId + (editTrackId * this.props.width);
+  let chordLocation;
+  if (isNaN(editNoteId)) {
+    chordLocation = song.length - 1;
+  } else {
+    chordLocation = editNoteId + (editTrackId * this.props.width);
+  }
   let newLine = Array(this.props.width).fill(",,,,,")
   song = song.slice(0,chordLocation+1).concat(newLine).concat(song.slice(chordLocation+1));
   this.setState({song: song,
@@ -251,10 +256,10 @@ handleInsertMeasure() {
         <br/>
         <button className="button inline-block" onClick={() => this.handleSave()}>Save Tab</button>
         <button className="button inline-block" onClick={() => this.handleRemoveBlanks()}>Delete Trailing Spaces</button>
+        <button className="button inline-block" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
         <div className="inline-block">
           <div className={this.state.editBox}>
-            <button className="button" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
-            <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure</button>
+            <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure Line</button>
           </div>
         </div>
         <ul>

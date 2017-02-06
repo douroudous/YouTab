@@ -24,9 +24,12 @@ class String extends React.Component {
     });
 
     return(
-      <div className="App text row">
+      <div className="App text">
+          <div className='inline-block not-bold'>
+              {this.props.open}|--
+          </div>
           <div className='inline-block'>
-              {this.props.open}|--{notes}
+              {notes}
           </div>
       </div>
     );

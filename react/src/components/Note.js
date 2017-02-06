@@ -28,7 +28,7 @@ const Note  = props => {
       <span className={selectedNoteClass} id={props.id} data-track={props.trackId} data-string={props.stringId} onClick={props.handleSelect}>
         {note}
       </span>
-      <span>{noteBuffer}</span>
+      <span className="grey">{noteBuffer}</span>
     </div>
   );
 };
