@@ -20,6 +20,8 @@ class App extends React.Component {
     this.handleInsert = this.handleInsert.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleInsertLine = this.handleInsertLine.bind(this);
+    this.handleRemoveBlanks = this.handleRemoveBlanks.bind(this);
   }
 
   componentWillMount() {
@@ -41,8 +43,6 @@ class App extends React.Component {
         let song = body.tab;
         let extra = this.props.width - (song.length % this.props.width);
         song = song.concat(Array(extra).fill(",,,,,"))
-        // also remove extra blank notes if there are more than a lines worth at the end
-
         this.setState({ title: body.title,
                         artist: body.artist,
                         song: song});
@@ -56,10 +56,11 @@ class App extends React.Component {
     let editStringId= event.target.dataset.string;
     let editTrackId= event.target.dataset.track;
     let chordArray = this.state.song[editNoteId].split(",");
+    let editBox = document.getElementsByClassName("edit-box")[0];
     if (editNote != "-") {
-      document.getElementsByClassName("edit-box")[0].value = editNote;
+      editBox.value = editNote;
     } else {
-      document.getElementsByClassName("edit-box")[0].value = "";
+      editBox.value = "";
     }
     this.setState({ editTrackId: editTrackId,
                     editStringId: editStringId,
@@ -87,7 +88,7 @@ class App extends React.Component {
                     editBox: "hidden"});
   }
 
-  handleDelete(event) {
+  handleDelete() {
     let song = this.state.song;
     let editNoteId = parseInt(this.state.editNoteId);
     let editStringId = parseInt(this.state.editStringId);
@@ -105,21 +106,25 @@ class App extends React.Component {
                     editBox: "hidden"});
   }
 
-  handleInsert(event) {
+  handleInsert() {
    let song = this.state.song;
    let editNoteId = parseInt(this.state.editNoteId);
    let editTrackId = parseInt(this.state.editTrackId);
    let chordLocation = editNoteId + (editTrackId * this.props.width);
    song.splice(chordLocation + 1, 0, ",,,,,");
-   let extra = this.props.width - (song.length % this.props.width);
-   song = song.concat(Array(extra).fill(",,,,,"))
-   this.setState({ song: song,
-                   editTrackId: "",
-                   editStringId: "",
-                   editNoteId: "",
-                   editNote: "",
-                   editBox: "hidden"});
+   if (editNoteId == this.props.width - 1) {
+     editTrackId += 1;
+     editNoteId = 0;
+   } else {
+     editNoteId += 1;
+   }
+   this.setState({song: song,
+                  editTrackId: editTrackId,
+                  editNoteId: editNoteId,
+                  editNote: ""});
  }
+
+
 
  handleRemove(event) {
    let song = this.state.song;
@@ -127,13 +132,38 @@ class App extends React.Component {
    let editTrackId = parseInt(this.state.editTrackId);
    let chordLocation = editNoteId + (editTrackId * this.props.width);
    song.splice(chordLocation, 1);
-   // also remove extra blank notes if there are more than a lines worth at the end
+   if (chordLocation == song.length) {
+     editNoteId -= 1;
+   }
    this.setState({ song: song,
-                   editTrackId: "",
-                   editStringId: "",
-                   editNoteId: "",
-                   editNote: "",
-                   editBox: "hidden"});
+                   editTrackId: editTrackId,
+                   editNoteId: editNoteId,
+                   editNote: ""});
+ }
+
+ handleInsertLine() {
+  let song = this.state.song;
+  let editNoteId = parseInt(this.state.editNoteId);
+  let editTrackId = parseInt(this.state.editTrackId);
+  let chordLocation = editNoteId + (editTrackId * this.props.width);
+  let newLine = Array(this.props.width).fill(",,,,,")
+  song = song.slice(0,chordLocation+1).concat(newLine).concat(song.slice(chordLocation+1));
+  this.setState({song: song,
+                 editTrackId: editTrackId + 1,
+                 editNoteId: editNoteId,
+                 editNote: ""});
+}
+
+ handleRemoveBlanks(event) {
+   let song = this.state.song;
+   for(let i = song.length - 1; i >= 0; i--){
+     if (song[i] == ",,,,,") {
+       song.splice(i,1);
+     } else {
+       break;
+     }
+   }
+   this.setState({ song: song });
  }
 
   handleSave() {
@@ -196,18 +226,21 @@ class App extends React.Component {
       <div className="animated fadeIn">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
+        <button className="button" onClick={() => this.handleSave()}>Save Tab</button>
+        <button className="button" onClick={() => this.handleRemoveBlanks()}>Clear Trailing Spaces</button>
+        <br/>
         <ul>
           {tracks}
         </ul>
-        <button className="button columns small-2" onClick={() => this.handleSave()}>Save</button>
         <div className={this.state.editBox}>
           <form className='columns small-2'>
             <input className='edit-box' type="text"/>
           </form>
-          <button className="button columns small-2" onClick={() => this.handleEdit()}>Add/Edit</button>
-          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete</button>
-          <button className="button columns small-2" onClick={() => this.handleInsert()}>Insert</button>
-          <button className="button columns small-2" onClick={() => this.handleRemove()}>Remove</button>
+          <button className="button columns small-2" onClick={() => this.handleEdit()}>Add/Edit Note</button>
+          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete Note</button>
+          <button className="button columns small-2" onClick={() => this.handleInsert()}>Insert Space</button>
+          <button className="button columns small-2" onClick={() => this.handleRemove()}>Remove Note/Space</button>
+          <button className="button columns small-2" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
         </div>
       </div>
     );

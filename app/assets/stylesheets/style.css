@@ -17,13 +17,6 @@ nav, form{
   text-align: center;
 }
 
-.top-menu {
-  text-align: center;
-  display: inline-block;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
 .text {
   font-family: "Andale Mono";
   font-size: 15px;
