@@ -58,6 +58,11 @@ nav, form{
   display:none;
 }
 
+.edit-box {
+  width: 50%;
+  margin-left: 25%;
+}
+
 .add-review{
   padding-top: 30px;
 }

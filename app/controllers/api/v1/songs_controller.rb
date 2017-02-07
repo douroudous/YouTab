@@ -10,20 +10,15 @@ class Api::V1::SongsController < ApplicationController
   end
 
   def create
-    @song = Song.new(song_params)
-    binding.pry
-    # @song.artist = Artist.find(params[:artist_id])
+    @song = Song.new
+    @song.artist = Artist.find(params[:artist_id])
     @song.user = current_user
-    # if @song.version == 2
-    #   @song.version = version
-    # end
-    if @song.save
-      flash[:notice] =  "Tab added successfully"
-      redirect_to song_path(@song)
-    else
-      flash.now[:notice] = @song.errors.full_messages
-      render :new
-    end
+    song_info = JSON.parse(request.body.read)
+    @song.title = song_info["title"]
+    @song.version = song_info["version"]
+    # check if song is new or existing, set version accordingly
+    @song.save
+    render json: @song
   end
 
   def show

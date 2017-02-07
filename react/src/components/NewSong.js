@@ -9,9 +9,13 @@ class NewSong extends React.Component {
       allSongs: "",
       uniqueSongs: "",
       newSong: "display-none",
-      existingSong: "display-none"
+      existingSong: "display-none",
+      options: "",
+      newSongTitle: ""
     };
-    this.handleNewSong = this.handleNewExisting.bind(this);
+    this.handleNewExisting = this.handleNewExisting.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -47,9 +51,39 @@ class NewSong extends React.Component {
       newSong = "display-none"
     }
     this.setState({ newSong: newSong,
-                    existingSong: existingSong});
+                    existingSong: existingSong,
+                    options: "display-none"});
   }
 
+  handleSubmit() {
+    let data = {
+        title: this.state.newSongTitle,
+        version: 1
+    };
+    let songData = JSON.stringify(data);
+
+    fetch(`/api/v1/artists/${this.props.artistId}/songs.json`,
+      { method: 'post',
+        body: songData,
+        credentials: 'include'
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          let errorMessage = `${response.status} ($response.statusText)`,
+            error = new Error(errorMessage);
+            throw(error);
+        }
+      })
+      .then(data => {
+      })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleChange(event) {
+    this.setState({newSongTitle: event.target.value});
+  }
 
   render() {
     let songs = [];
@@ -67,18 +101,23 @@ class NewSong extends React.Component {
 
     return(
       <div>
-        <div className="centered">
-        <button className="button" onClick={() => this.handleNewExisting("new")}>New Song</button>
-        <button className="button" onClick={() => this.handleNewExisting("existing")}>Existing Song</button>
+        <div className={this.state.options}>
+          <div className="text centered">
+            <button className="button" onClick={() => this.handleNewExisting("new")}>New</button>
+            <br/>
+            <button className="button" onClick={() => this.handleNewExisting("existing")}>Existing</button>
+          </div>
         </div>
         <div className={this.state.newSong}>
-          <p className="text centered">
-            Enter new song title here
-          </p>
+          <form className="text" onSubmit={this.handleSubmit}>
+            <label>Enter new song title:</label>
+            <input className='edit-box' type="text"  value={this.state.value} onChange={this.handleChange}/>
+            <input type="submit"/>
+          </form>
         </div>
-        <ul className={this.state.existingSong}>
+        <div className={this.state.existingSong}>
           {songs}
-        </ul>
+        </div>
       </div>
     );
   }

@@ -5,7 +5,7 @@ const Song  = props => {
 
   return(
     <div className='text centered'>
-      <p>{props.title}</p>
+      <button className="button">{props.title}</button>
     </div>
   );
 };
