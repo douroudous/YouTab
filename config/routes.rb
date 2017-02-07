@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :artists do
-    resources :songs, only: [:new, :create]
-  end
+  # resources :artists do
+  #   resources :songs, only: [:new, :create]
+  # end
 
   resources :artists
   resources :users, only: [:index, :show, :destroy]
@@ -17,10 +17,16 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :songs, only: [:show, :update]
+      resources :artists, only: [:show] do
+        resources :songs, only: [:new, :create]
+      end
     end
   end
 
   resources :interface, only: [:show]
+
+  resources :entry, only: [:show]
+
 
 
 end

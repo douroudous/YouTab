@@ -13,7 +13,7 @@ nav, form{
   text-align: center;
 }
 
-.notice {
+.notice, .centered {
   text-align: center;
 }
 
@@ -52,6 +52,10 @@ nav, form{
 
 .hidden{
   visibility: hidden;
+}
+
+.display-none{
+  display:none;
 }
 
 .add-review{
