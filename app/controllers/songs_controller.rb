@@ -10,7 +10,7 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-    @full_title = "#{@song.title} (#{@song.version.to_s})"
+    @full_title = full_title(@song)
     @review = Review.new
     @reviews = @song.reviews
     @reviews = @reviews.order(created_at: :desc)
@@ -20,14 +20,16 @@ class SongsController < ApplicationController
   def new
     @song = Song.new
     @artist = Artist.find(params[:artist_id])
+    @song_list = @artist.songs.map { |x| x.title }.uniq
   end
 
   def create
     @song = Song.new(song_params)
     @song.artist = Artist.find(params[:artist_id])
-    @song.title = @song.artist.songs.find(params[:song][:title]).title
     @song.user = current_user
-    binding.pry
+    if @song.version == 2
+      @song.version = version
+    end
     if @song.save
       flash[:notice] =  "Tab added successfully"
       redirect_to song_path(@song)
@@ -61,13 +63,26 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title, :artist_id, :remake)
+    params.require(:song).permit(:title, :artist_id, :version)
   end
 
   def avg_rating(song)
     sum = song.reviews.sum("rating")
     count = song.reviews.length.to_f
-    (sum/count).round(1)
+    if count > 0
+      (sum/count).round(1)
+    else
+      "-"
+    end
   end
+
+  def version
+    matches = Song.where(:title => @song.title)
+    matches.sort_by { |song| song.version }.last.version + 1
+  end
+
+
+
+  helper_method :avg_rating
 
 end

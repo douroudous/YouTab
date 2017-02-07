@@ -19,8 +19,6 @@ class App extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleInsert = this.handleInsert.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleInsertLine = this.handleInsertLine.bind(this);
     this.handleInsertMeasure = this.handleInsertMeasure.bind(this);

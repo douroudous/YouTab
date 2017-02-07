@@ -3,7 +3,7 @@
   <h3> <%= link_to @song.artist.name, @song.artist %> </h3>
   <h3> <%= link_to @song.user.username, @song.user %> </h3>
 
-  <% if !@avg_rating.nan? %>
+  <% if @avg_rating != "-" %>
     <h3> <%= @avg_rating %> stars</h3>
   <% end %>
 </div>
