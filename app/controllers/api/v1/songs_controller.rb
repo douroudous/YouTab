@@ -15,10 +15,12 @@ class Api::V1::SongsController < ApplicationController
     @song.user = current_user
     song_info = JSON.parse(request.body.read)
     @song.title = song_info["title"]
-    @song.version = song_info["version"]
-    # check if song is new or existing, set version accordingly
+    if song_info["version"]
+      @song.version = song_info["version"]
+    else
+      @song.version = version
+    end
     @song.save
-    render json: @song
   end
 
   def show
@@ -39,6 +41,11 @@ class Api::V1::SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title, :artist_id, :version)
+  end
+
+  def version
+    matches = Song.where(:title => @song.title)
+    matches.sort_by { |song| song.version }.last.version + 1
   end
 
 end

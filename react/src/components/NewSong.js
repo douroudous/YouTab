@@ -13,8 +13,9 @@ class NewSong extends React.Component {
       options: "",
       newSongTitle: ""
     };
-    this.handleNewExisting = this.handleNewExisting.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleSubmitNew = this.handleSubmitNew.bind(this);
+    this.handleSubmitExisting = this.handleSubmitExisting.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -41,13 +42,12 @@ class NewSong extends React.Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  handleNewExisting(event) {
+  handleToggle(event) {
     let newSong = "";
     let existingSong = "";
     if (event == "new") {
       existingSong = "display-none"
-    }
-    else {
+    } else {
       newSong = "display-none"
     }
     this.setState({ newSong: newSong,
@@ -55,7 +55,33 @@ class NewSong extends React.Component {
                     options: "display-none"});
   }
 
-  handleSubmit() {
+  handleSubmitExisting(event) {
+    alert(`${event} was entered`);
+    let data = {
+        title: event,
+    };
+    let songData = JSON.stringify(data);
+    fetch(`/api/v1/artists/${this.props.artistId}/songs.json`,
+      { method: 'post',
+        body: songData,
+        credentials: 'include'
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          let errorMessage = `${response.status} ($response.statusText)`,
+            error = new Error(errorMessage);
+            throw(error);
+        }
+      })
+      .then(data => {
+      })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleSubmitNew(event) {
+    alert(`${this.state.newSongTitle} was entered`);
     let data = {
         title: this.state.newSongTitle,
         version: 1
@@ -94,6 +120,7 @@ class NewSong extends React.Component {
                       key = {i}
                       id = {i}
                       title = {uniqueSongs[i]}
+                      handleSubmitExisting={this.handleSubmitExisting}
                     />;
         songs.push(song);
       }
@@ -103,13 +130,13 @@ class NewSong extends React.Component {
       <div>
         <div className={this.state.options}>
           <div className="text centered">
-            <button className="button" onClick={() => this.handleNewExisting("new")}>New</button>
+            <button className="button" onClick={() => this.handleToggle("new")}>New</button>
             <br/>
-            <button className="button" onClick={() => this.handleNewExisting("existing")}>Existing</button>
+            <button className="button" onClick={() => this.handleToggle("existing")}>Existing</button>
           </div>
         </div>
         <div className={this.state.newSong}>
-          <form className="text" onSubmit={this.handleSubmit}>
+          <form className="text" onSubmit={this.handleSubmitNew}>
             <label>Enter new song title:</label>
             <input className='edit-box' type="text"  value={this.state.value} onChange={this.handleChange}/>
             <input type="submit"/>

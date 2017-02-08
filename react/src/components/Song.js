@@ -5,7 +5,9 @@ const Song  = props => {
 
   return(
     <div className='text centered'>
-      <button className="button">{props.title}</button>
+      <button className="button" onClick={() => props.handleSubmitExisting(props.title)}>
+        {props.title}
+      </button>
     </div>
   );
 };

@@ -7,16 +7,16 @@
 <% end %>
 
 
-<p class="small-3 columns">Title</p>
+<p class="small-4 columns">Title</p>
 <p class="small-2 columns">Artist</p>
 <p class="small-2 columns">Avg Rating</p>
 <p class="small-2 columns">Uploader</p>
-<p class="small-3 columns">Date</p>
+<p class="small-2 columns">Date</p>
 <% @songs.each do |song| %>
-  <p class="small-3 columns"><%= link_to "#{full_title(song)}", song %> </p>
+  <p class="small-4 columns"><%= link_to "#{full_title(song)}", song %> </p>
   <p class="small-2 columns"><%= link_to "#{song.artist.name}", song.artist %> </p>
   <p class="small-2 columns"><%= link_to "#{avg_rating(song)}", song.artist %> </p>
 
   <p class="small-2 columns"><%= link_to "#{song.user.username}", song.user %> </p>
-  <p class="small-3 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
+  <p class="small-2 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
 <% end %>

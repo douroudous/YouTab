@@ -3,7 +3,7 @@
   <h3> <%= link_to @song.artist.name, @song.artist %> </h3>
   <h3> <%= link_to @song.user.username, @song.user %> </h3>
 
-  <% if @avg_rating != "-" %>
+  <% if @avg_rating != "" %>
     <h3> <%= @avg_rating %> stars</h3>
   <% end %>
 </div>
@@ -42,7 +42,7 @@
     <% end %>
   <% end %>
 </div>
-
+</br>
 <% if (@song.user.id == current_user.id || current_user.admin)%>
   <p><%= link_to "View Tab", interface_path(:option => "view") %></p>
   <p><%= link_to "Edit Tab", interface_path(:option => "edit") %></p>
