@@ -81,7 +81,7 @@ class NewSong extends React.Component {
   }
 
   handleSubmitExisting(event) {
-    alert(`${event} was entered`);
+    alert(`A new version of ${event} was created`);
     let data = {
         title: event,
     };
@@ -103,6 +103,12 @@ class NewSong extends React.Component {
       .then(data => {
       })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+
+    this.setState({ newSong: "display-none",
+                    existingSong: "display-none",
+                    importSong: "display-none",
+                    options: "",
+                    backButton: "display-none"});
   }
 
   handleSubmitImport(event) {
@@ -129,7 +135,7 @@ class NewSong extends React.Component {
   }
 
   handleSelectImport(event) {
-    alert(`${event} was imported`);
+    alert(`A new version of ${event.title} was imported and created`);
     // import tab info into data to be set in rails controller
     let data = {
         title: event.title,
@@ -153,10 +159,16 @@ class NewSong extends React.Component {
       .then(data => {
       })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+
+    this.setState({ newSong: "display-none",
+                    existingSong: "display-none",
+                    importSong: "display-none",
+                    options: "",
+                    backButton: "display-none"});
   }
 
   handleSubmitNew(event) {
-    alert(`${this.state.newSongTitle} was entered`);
+    alert(`${this.state.newSongTitle} was created`);
     let data = {
         title: this.state.newSongTitle,
         version: 1
@@ -180,6 +192,12 @@ class NewSong extends React.Component {
       .then(data => {
       })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
+
+    this.setState({ newSong: "display-none",
+                    existingSong: "display-none",
+                    importSong: "display-none",
+                    options: "",
+                    backButton: "display-none"});
   }
 
   handleChange(event) {
