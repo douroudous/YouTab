@@ -46,6 +46,5 @@
 <% if (@song.user.id == current_user.id || current_user.admin)%>
   <p><%= link_to "View Tab", interface_path(:option => "view") %></p>
   <p><%= link_to "Edit Tab", interface_path(:option => "edit") %></p>
-  <p><%= link_to "Update Tab Info", edit_song_path %></p>
   <p><%= link_to "Delete Tab", @song, data: {:confirm => 'Are you sure you want to delete this tab?'}, method: :delete %></p>
 <% end %>

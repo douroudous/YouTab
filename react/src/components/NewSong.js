@@ -11,9 +11,11 @@ class NewSong extends React.Component {
       newSong: "display-none",
       existingSong: "display-none",
       options: "",
+      backButton: "display-none",
       newSongTitle: ""
     };
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleBack = this.handleBack.bind(this);
     this.handleSubmitNew = this.handleSubmitNew.bind(this);
     this.handleSubmitExisting = this.handleSubmitExisting.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -52,7 +54,15 @@ class NewSong extends React.Component {
     }
     this.setState({ newSong: newSong,
                     existingSong: existingSong,
-                    options: "display-none"});
+                    options: "display-none",
+                    backButton: ""});
+  }
+
+  handleBack() {
+    this.setState({ newSong: "display-none",
+                    existingSong: "display-none",
+                    options: "",
+                    back: "display-none"});
   }
 
   handleSubmitExisting(event) {
@@ -144,6 +154,11 @@ class NewSong extends React.Component {
         </div>
         <div className={this.state.existingSong}>
           {songs}
+        </div>
+        <div className={this.state.backButton}>
+          <div className="text centered">
+            <button className="button" onClick={() => this.handleBack("new")}>Back</button>
+          </div>
         </div>
       </div>
     );
