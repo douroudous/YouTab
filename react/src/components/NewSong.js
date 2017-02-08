@@ -13,13 +13,15 @@ class NewSong extends React.Component {
       importSong: "display-none",
       options: "",
       backButton: "display-none",
-      newSongTitle: ""
+      newSongTitle: "",
+      importOption: ""
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleBack = this.handleBack.bind(this);
     this.handleSubmitNew = this.handleSubmitNew.bind(this);
     this.handleSubmitExisting = this.handleSubmitExisting.bind(this);
     this.handleSubmitImport = this.handleSubmitImport.bind(this);
+    this.handleSelectImport = this.handleSelectImport.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -50,21 +52,26 @@ class NewSong extends React.Component {
     let newSong = "";
     let existingSong = "";
     let importSong = "";
+    let importOption = "";
     if (event == "new") {
       existingSong = "display-none"
       importSong = "display-none"
-    } else if (event == "existing") {
+    }
+    else if (event == "existing"){
       newSong = "display-none"
       importSong = "display-none"
+      importOption = this.handleSubmitExisting
     } else {
       newSong = "display-none"
       existingSong = "display-none"
+      importOption = this.handleSubmitImport
     }
     this.setState({ newSong: newSong,
                     existingSong: existingSong,
                     importSong: importSong,
                     options: "display-none",
-                    backButton: ""});
+                    backButton: "",
+                    importOption: importOption});
   }
 
   handleBack() {
@@ -101,7 +108,25 @@ class NewSong extends React.Component {
   }
 
   handleSubmitImport(event) {
+    // display only the versions of the song and a back button
+    let songs = this.state.allSongs;
+    let matches = [];
+    for (let song of songs) {
+      if (event == song.title) {
+        matches.push(song);
+      }
+    }
+    this.setState({ uniqueSongs: matches,
+                    newSong: "display-none",
+                    existingSong: "display-none",
+                    importSong: "",
+                    options: "display-none",
+                    backButton: ""});
+  }
+
+  handleSelectImport(event) {
     alert(`${event} was entered`);
+    // import tab into data
     let data = {
         title: event,
     };
@@ -164,8 +189,8 @@ class NewSong extends React.Component {
         let song = <Song
                       key = {i}
                       id = {i}
-                      title = {uniqueSongs[i]}
-                      handleSubmitExisting={this.handleSubmitExisting}
+                      song = {uniqueSongs[i]}
+                      handleSubmit={this.state.importOption}
                     />;
         songs.push(song);
       }
@@ -188,6 +213,9 @@ class NewSong extends React.Component {
           </form>
         </div>
         <div className={this.state.existingSong}>
+          {songs}
+        </div>
+        <div className={this.state.importSong}>
           {songs}
         </div>
         <div className={this.state.backButton}>

@@ -2,11 +2,11 @@ import React from 'react';
 
 const Song  = props => {
 
-
+  debugger;
   return(
     <div className='text centered'>
-      <button className="button" onClick={() => props.handleSubmitExisting(props.title)}>
-        {props.title}
+      <button className="button" onClick={() => props.handleSubmit(props.song)}>
+        {props.song}
       </button>
     </div>
   );
