@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Song  = props => {
+const ExistingSong  = props => {
 
   return(
     <div className='text centered'>
@@ -11,4 +11,4 @@ const Song  = props => {
   );
 };
 
-export default Song;
+export default ExistingSong;

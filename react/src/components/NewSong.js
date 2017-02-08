@@ -1,5 +1,6 @@
 import React from 'react';
-import Song from './Song';
+import ExistingSong from './ExistingSong';
+import ImportSong from './ImportSong';
 
 class NewSong extends React.Component {
   constructor(props) {
@@ -105,16 +106,16 @@ class NewSong extends React.Component {
   }
 
   handleSubmitImport(event) {
-    // display only the versions of the song and a back button
     let songs = this.state.allSongs;
     let matches = [];
     for (let song of songs) {
       if (event == song.title) {
-        let match = <Song
+        let match = <ImportSong
                       key = {song.id}
                       id = {song.id}
                       song = {song}
                       handleSubmit={this.state.importOption}
+                      handleSelectImport={this.handleSelectImport}
                     />;
         matches.push(match);
       }
@@ -128,10 +129,11 @@ class NewSong extends React.Component {
   }
 
   handleSelectImport(event) {
-    alert(`${event} was entered`);
-    // import tab into data
+    alert(`${event} was imported`);
+    // import tab info into data to be set in rails controller
     let data = {
-        title: event,
+        title: event.title,
+        tab: event.tab
     };
     let songData = JSON.stringify(data);
     fetch(`/api/v1/artists/${this.props.artistId}/songs.json`,
@@ -189,7 +191,7 @@ class NewSong extends React.Component {
     let uniqueSongs = this.state.uniqueSongs;
     if (uniqueSongs.length > 0) {
       for (let i = 0; i < uniqueSongs.length; i++) {
-        let song = <Song
+        let song = <ExistingSong
                       key = {i}
                       id = {i}
                       song = {uniqueSongs[i]}
@@ -199,9 +201,9 @@ class NewSong extends React.Component {
       }
     }
 
-    let title;
+    let sameTitle;
     if (this.state.sameTitle.length > 0) {
-      title = this.state.sameTitle[0].props.song.title;
+      sameTitle = this.state.sameTitle;
     }
 
     return(
@@ -224,7 +226,7 @@ class NewSong extends React.Component {
           {songs}
         </div>
         <div className={this.state.importSong}>
-        here are songs with the title {title}
+          {sameTitle}
         </div>
         <div className={this.state.backButton}>
           <div className="text centered">
