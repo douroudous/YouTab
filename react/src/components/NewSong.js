@@ -235,7 +235,7 @@ class NewSong extends React.Component {
         </div>
         <div className={this.state.newSong}>
           <form className="text" onSubmit={this.handleSubmitNew}>
-            <label>Enter new song title:</label>
+            <label className="text-label">Enter new song title:</label>
             <input className='edit-box' type="text"  value={this.state.value} onChange={this.handleChange}/>
             <input type="submit"/>
           </form>

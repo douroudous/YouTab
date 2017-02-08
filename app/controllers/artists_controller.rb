@@ -10,6 +10,7 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
+    @sorted_songs = @artist.songs.order("title asc")
   end
 
   def new

@@ -1,7 +1,13 @@
+body {
+  /*background-image: url("/assets/guitar.jpg");*/
+  background-color: #222930;
+}
+
 h1, h2, h3 {
   text-align: center;
   font-family: "Georgia";
-  color: #016CAA;
+  /*color: #016CAA;*/
+  color: #4EB1BA;
   font-weight: 900;
 }
 
@@ -9,8 +15,31 @@ h3 {
   font-size: 25px;
 }
 
-nav, form{
+nav{
   text-align: center;
+  background: rgba(91, 91, 91, .6);
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+form{
+  text-align: center;
+}
+
+.link {
+  font-family: "Georgia";
+  color: #4EB1BA;
+}
+
+.top-menu {
+  font-family: "Georgia";
+  color: #E9E9E9;
+}
+
+.button {
+  background-color: white;
+  color: #016CAA;
+  font-size: 25px;
 }
 
 .notice, .centered {
@@ -20,7 +49,17 @@ nav, form{
 .text {
   font-family: "Andale Mono";
   font-size: 15px;
-  color: black;
+  color: #016CAA;
+}
+
+.text-list {
+  font-family: "Andale Mono";
+  font-size: 20px;
+  color: #E9E9E9;
+}
+
+.text-label {
+  color: #E9E9E9;
 }
 
 .grey {
@@ -74,7 +113,8 @@ nav, form{
   font-size: 1.5rem;
   background-color: #CDDCDE;
   box-shadow: 5px 5px 2px grey;
-  width: 200px;
+  width: 40%;
+  margin: 0 auto;
 }
 
 li a, .dropbtn {
@@ -85,7 +125,7 @@ li a, .dropbtn {
 }
 
 li a:hover, .dropdown:hover .dropbtn {
-    background-color: #016CAA;
+    background-color: #4EB1BA;
     color: white;
 }
 
@@ -96,21 +136,23 @@ li.dropdown {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #222930;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: #016CAA;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #016CAA}
+.dropdown-content a:hover {
+  background-color: #4EB1BA;
+}
 
 .dropdown:hover .dropdown-content {
     color: white;
