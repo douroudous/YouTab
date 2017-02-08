@@ -8,6 +8,7 @@ class NewSong extends React.Component {
       artist: "",
       allSongs: "",
       uniqueSongs: "",
+      sameTitle: "",
       newSong: "display-none",
       existingSong: "display-none",
       importSong: "display-none",
@@ -51,24 +52,20 @@ class NewSong extends React.Component {
   handleToggle(event) {
     let newSong = "";
     let existingSong = "";
-    let importSong = "";
     let importOption = "";
     if (event == "new") {
       existingSong = "display-none"
-      importSong = "display-none"
     }
     else if (event == "existing"){
       newSong = "display-none"
-      importSong = "display-none"
       importOption = this.handleSubmitExisting
     } else {
       newSong = "display-none"
-      existingSong = "display-none"
       importOption = this.handleSubmitImport
     }
     this.setState({ newSong: newSong,
                     existingSong: existingSong,
-                    importSong: importSong,
+                    importSong: "display-none",
                     options: "display-none",
                     backButton: "",
                     importOption: importOption});
@@ -113,10 +110,16 @@ class NewSong extends React.Component {
     let matches = [];
     for (let song of songs) {
       if (event == song.title) {
-        matches.push(song);
+        let match = <Song
+                      key = {song.id}
+                      id = {song.id}
+                      song = {song}
+                      handleSubmit={this.state.importOption}
+                    />;
+        matches.push(match);
       }
     }
-    this.setState({ uniqueSongs: matches,
+    this.setState({ sameTitle: matches,
                     newSong: "display-none",
                     existingSong: "display-none",
                     importSong: "",
@@ -196,6 +199,11 @@ class NewSong extends React.Component {
       }
     }
 
+    let title;
+    if (this.state.sameTitle.length > 0) {
+      title = this.state.sameTitle[0].props.song.title;
+    }
+
     return(
       <div>
         <div className={this.state.options}>
@@ -216,7 +224,7 @@ class NewSong extends React.Component {
           {songs}
         </div>
         <div className={this.state.importSong}>
-          {songs}
+        here are songs with the title {title}
         </div>
         <div className={this.state.backButton}>
           <div className="text centered">
