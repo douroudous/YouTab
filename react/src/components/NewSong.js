@@ -10,6 +10,7 @@ class NewSong extends React.Component {
       uniqueSongs: "",
       newSong: "display-none",
       existingSong: "display-none",
+      importSong: "display-none",
       options: "",
       backButton: "display-none",
       newSongTitle: ""
@@ -18,6 +19,7 @@ class NewSong extends React.Component {
     this.handleBack = this.handleBack.bind(this);
     this.handleSubmitNew = this.handleSubmitNew.bind(this);
     this.handleSubmitExisting = this.handleSubmitExisting.bind(this);
+    this.handleSubmitImport = this.handleSubmitImport.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -47,13 +49,20 @@ class NewSong extends React.Component {
   handleToggle(event) {
     let newSong = "";
     let existingSong = "";
+    let importSong = "";
     if (event == "new") {
       existingSong = "display-none"
+      importSong = "display-none"
+    } else if (event == "existing") {
+      newSong = "display-none"
+      importSong = "display-none"
     } else {
       newSong = "display-none"
+      existingSong = "display-none"
     }
     this.setState({ newSong: newSong,
                     existingSong: existingSong,
+                    importSong: importSong,
                     options: "display-none",
                     backButton: ""});
   }
@@ -61,11 +70,37 @@ class NewSong extends React.Component {
   handleBack() {
     this.setState({ newSong: "display-none",
                     existingSong: "display-none",
+                    importSong: "display-none",
                     options: "",
-                    back: "display-none"});
+                    backButton: "display-none"});
   }
 
   handleSubmitExisting(event) {
+    alert(`${event} was entered`);
+    let data = {
+        title: event,
+    };
+    let songData = JSON.stringify(data);
+    fetch(`/api/v1/artists/${this.props.artistId}/songs.json`,
+      { method: 'post',
+        body: songData,
+        credentials: 'include'
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          let errorMessage = `${response.status} ($response.statusText)`,
+            error = new Error(errorMessage);
+            throw(error);
+        }
+      })
+      .then(data => {
+      })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  handleSubmitImport(event) {
     alert(`${event} was entered`);
     let data = {
         title: event,
@@ -140,9 +175,9 @@ class NewSong extends React.Component {
       <div>
         <div className={this.state.options}>
           <div className="text centered">
-            <button className="button" onClick={() => this.handleToggle("new")}>New</button>
-            <br/>
-            <button className="button" onClick={() => this.handleToggle("existing")}>Existing</button>
+            <button className="button" onClick={() => this.handleToggle("new")}>New</button><br/>
+            <button className="button" onClick={() => this.handleToggle("existing")}>Existing</button><br/>
+            <button className="button" onClick={() => this.handleToggle("import")}>Import from Existing Tab</button>
           </div>
         </div>
         <div className={this.state.newSong}>
