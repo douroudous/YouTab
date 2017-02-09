@@ -251,7 +251,7 @@ handleInsertMeasure() {
     }
 
     return(
-      <div className="animated fadeIn">
+      <div className="animated fadeIn react-interface">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
         <button className="button inline-block" onClick={() => this.handleSave()}>Save Tab</button>

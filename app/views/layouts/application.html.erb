@@ -9,48 +9,48 @@
   </head>
 
   <body>
-    <h1>YouTab</h1>
-    <nav>
-      <div class="row container">
+    <header>
+      <h1>YouTab</h1>
+      <nav>
         <li class="dropdown">
-          <div class="dropbtn"><%= link_to "Tabs", root_path, class: "top-menu"%></div>
-          <div class="dropdown-content">
-          </div>
+          <div class="dropbtn"><%= link_to "Tabs", root_path %></div>
         </li>
         <li class="dropdown">
-          <div class="dropbtn"><%= link_to "Artists", artists_path, class: "top-menu" %></div>
+          <div class="dropbtn"><%= link_to "Artists", artists_path %></div>
           <div class="dropdown-content">
-              <div><%= link_to "New Artist", new_artist_path, class: "top-menu" %></div>
+              <div><%= link_to "New Artist", new_artist_path %></div>
           </div>
         </li>
         <li class="dropdown">
           <% if user_signed_in? %>
-          <div class="dropbtn"><%= link_to 'Users', users_path, class: "top-menu" %></div>
-          <div class="dropdown-content">
-              <div> <%= link_to current_user.username, user_path(current_user), class: "top-menu" %></div>
-              <div> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "top-menu" %></div>
-          </div>
+            <div class="dropbtn"><%= link_to 'Users', users_path%></div>
+            <div class="dropdown-content">
+                <div> <%= link_to current_user.username, user_path(current_user) %></div>
+                <div> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></div>
+            </div>
           <% else %>
-          <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path, class: "top-menu" %></div>
-          <div class="dropdown-content">
-              <div><%= link_to 'Sign Up', new_user_registration_path, class: "top-menu" %></div>
-          </div>
+            <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></div>
+            <div class="dropdown-content">
+                <div><%= link_to 'Sign Up', new_user_registration_path %></div>
+            </div>
           <% end %>
         </li>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
-    <% if notice.is_a?(Array) %>
-      <% notice.each do |this_notice| %>
-        <p class="notice"><%= this_notice %></p>
+    <main>
+      <% if notice.is_a?(Array) %>
+        <% notice.each do |this_notice| %>
+          <p class="notice"><%= this_notice %></p>
+        <% end %>
+      <%elsif notice %>
+        <p class="notice"> <%= notice %></p>
       <% end %>
-    <%elsif notice %>
-      <p class="notice"> <%= notice %></p>
-    <% end %>
 
-    <p class="alert"><%= alert %></p>
+      <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+      <%= yield %>
+    </main>
 
   </body>
 </html>

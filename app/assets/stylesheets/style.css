@@ -1,83 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
-  /*background-image: url("/assets/guitar.jpg");*/
-  background-color: #222930;
   margin: 0 auto;
-max-width: 50em;
-font-family: "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  color: #555;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  background-image: url("guitar.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  line-height: 1.2;
+  padding: 10vw 2em;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 1em;
 }
 
 h1, h2, h3 {
+  color: #333;
+  text-align: center;
+
+}
+
+.margins{
+  max-width: 50em;
+}
+
+header h1 {
+  color: white;
+  font-size: 2.5em;
+  font-weight: 300;
+}
+
+header a {
+  border: 1px solid #4EB1BA;
+  border-radius: 290486px;
+  color: white;
+  font-size: 0.6em;
+  letter-spacing: 0.2em;
+  padding: 1em 2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: none 200ms ease-out;
+  transition-property: color, background;
+}
+
+header a:hover {
+  background:  #4EB1BA;
+  color: white;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+}
+
+
+.dropdown:hover .dropdown-content {
+    color: white;
+    display: block;
+}
+
+/*h1, h2, h3 {
   text-align: center;
   font-family: "Georgia";
-  /*color: #016CAA;*/
   color: #4EB1BA;
   font-weight: 900;
-}
+}*/
 
-h3 {
+/*h3 {
   font-size: 25px;
-}
+}*/
 
-nav{
+/*nav{
   text-align: center;
   background: rgba(91, 91, 91, .6);
   margin-left: 35%;
   margin-right: 35%;
-}
+}*/
 
-form{
+/*form{
   text-align: center;
-}
+}*/
 
-.link {
+/*.link {
   font-family: "Georgia";
   color: #4EB1BA;
-}
+}*/
 
-.top-menu {
+/*.top-menu {
   font-family: "Georgia";
   color: #E9E9E9;
-}
+}*/
 
-.button {
+/*.button {
   background-color: #4EB1BA;
   color: #E9E9E9;
   font-size: 20px;
-}
+}*/
 
-.notice, .centered {
+/*.notice, .centered {
   text-align: center;
-}
+}*/
 
-.text {
+.tabs-text {
   font-family: "Andale Mono";
   font-size: 15px;
-  color: #016CAA;
 }
 
+/*
 .text-tab {
   font-family: "Andale Mono";
   font-size: 15px;
   color: white;
-}
+}*/
 
-.text-list {
+/*.text-list {
   font-family: "Andale Mono";
   font-size: 20px;
   color: #E9E9E9;
-}
+}*/
 
-.text-label {
+/*.text-label {
   color: #E9E9E9;
-}
+}*/
 
 .grey {
   color: #a3a3a3;
 }
 
-.column-labels {
+/*.column-labels {
   font-weight: 900;
-}
+}*/
 
 .optional-field:before {
   content: "\00a0";
@@ -112,16 +191,16 @@ form{
   display:none;
 }
 
-.edit-box {
+/*.edit-box {
   width: 50%;
   margin-left: 25%;
-}
+}*/
 
-.add-review{
+/*.add-review{
   padding-top: 30px;
-}
+}*/
 
-#search {
+/*#search {
   height: 70px;
   border-radius: 15px;
   text-align: center;
@@ -130,46 +209,4 @@ form{
   box-shadow: 5px 5px 2px grey;
   width: 40%;
   margin: 0 auto;
-}
-
-li a, .dropbtn {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-    background-color: #4EB1BA;
-    color: white;
-}
-
-li.dropdown {
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #222930;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #4EB1BA;
-}
-
-.dropdown:hover .dropdown-content {
-    color: white;
-    display: block;
-}
+}*/
