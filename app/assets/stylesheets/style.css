@@ -1,6 +1,9 @@
 body {
   /*background-image: url("/assets/guitar.jpg");*/
   background-color: #222930;
+  margin: 0 auto;
+max-width: 50em;
+font-family: "Helvetica", "Arial", sans-serif;
 }
 
 h1, h2, h3 {
@@ -37,9 +40,9 @@ form{
 }
 
 .button {
-  background-color: white;
-  color: #016CAA;
-  font-size: 25px;
+  background-color: #4EB1BA;
+  color: #E9E9E9;
+  font-size: 20px;
 }
 
 .notice, .centered {
@@ -50,6 +53,12 @@ form{
   font-family: "Andale Mono";
   font-size: 15px;
   color: #016CAA;
+}
+
+.text-tab {
+  font-family: "Andale Mono";
+  font-size: 15px;
+  color: white;
 }
 
 .text-list {
@@ -63,7 +72,7 @@ form{
 }
 
 .grey {
-  color: #666666;
+  color: #a3a3a3;
 }
 
 .column-labels {
@@ -79,13 +88,19 @@ form{
   display: inline-block;
 }
 
-.notice, .entry, .selected{
+.notice{
   color: red;
   font-weight: bold;
 }
 
+.selected{
+  color: red;
+  font-weight: bold;
+}
+
+
 .selected-chord{
-  color: blue;
+  color: #4EB1BA;
   font-weight: bold;
 }
 

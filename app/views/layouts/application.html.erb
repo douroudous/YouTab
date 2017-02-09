@@ -31,9 +31,9 @@
               <div> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "top-menu" %></div>
           </div>
           <% else %>
-          <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></div>
+          <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path, class: "top-menu" %></div>
           <div class="dropdown-content">
-              <div><%= link_to 'Sign Up', new_user_registration_path %></div>
+              <div><%= link_to 'Sign Up', new_user_registration_path, class: "top-menu" %></div>
           </div>
           <% end %>
         </li>

@@ -236,8 +236,8 @@ class NewSong extends React.Component {
         <div className={this.state.newSong}>
           <form className="text" onSubmit={this.handleSubmitNew}>
             <label className="text-label">Enter new song title:</label>
-            <input className='edit-box' type="text"  value={this.state.value} onChange={this.handleChange}/>
-            <input type="submit"/>
+            <input className='edit-box text-label' type="text"  value={this.state.value} onChange={this.handleChange}/>
+            <input className='link' type="submit"/>
           </form>
         </div>
         <div className={this.state.existingSong}>
