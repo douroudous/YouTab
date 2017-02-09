@@ -19,8 +19,6 @@ class App extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleInsert = this.handleInsert.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleInsertLine = this.handleInsertLine.bind(this);
     this.handleInsertMeasure = this.handleInsertMeasure.bind(this);
@@ -196,6 +194,7 @@ handleInsertMeasure() {
  }
 
   handleSave() {
+    alert(`This tab was saved.`);
     let data = {
         tab: this.state.song.join(";")
     };
@@ -270,10 +269,10 @@ handleInsertMeasure() {
           <form className='columns small-2'>
             <input className='edit-box' type="text"/>
           </form>
-          <button className="button columns small-2" onClick={() => this.handleEdit()}>Add/Edit Note</button>
-          <button className="button columns small-2" onClick={() => this.handleDelete()}>Delete Note</button>
+          <button className="button columns small-3" onClick={() => this.handleEdit()}>Add/Edit Note</button>
+          <button className="button columns small-3" onClick={() => this.handleDelete()}>Delete Note</button>
           <button className="button columns small-2" onClick={() => this.handleInsert()}>Insert Space</button>
-          <button className="button columns small-2" onClick={() => this.handleRemove()}>Remove Notes/Space</button>
+          <button className="button columns small-2" onClick={() => this.handleRemove()}>Remove Space</button>
 
         </div>
       </div>

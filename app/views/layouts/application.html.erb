@@ -9,36 +9,35 @@
   </head>
 
   <body>
+    <h1>YouTab</h1>
     <nav>
-      <h1>YouTab</h1>
-      <ul>
+      <div class="row container">
         <li class="dropdown">
-          <div class="dropbtn"><%= link_to "Tabs", root_path %></div>
+          <div class="dropbtn"><%= link_to "Tabs", root_path, class: "top-menu"%></div>
           <div class="dropdown-content">
-              <div><%= link_to "New Tab", new_song_path %></div>
           </div>
         </li>
         <li class="dropdown">
-          <div class="dropbtn"><%= link_to "Artists", artists_path %></div>
+          <div class="dropbtn"><%= link_to "Artists", artists_path, class: "top-menu" %></div>
           <div class="dropdown-content">
-              <div><%= link_to "New Artist", new_artist_path %></div>
+              <div><%= link_to "New Artist", new_artist_path, class: "top-menu" %></div>
           </div>
         </li>
         <li class="dropdown">
           <% if user_signed_in? %>
-          <div class="dropbtn"><%= link_to 'Users', users_path %></div>
+          <div class="dropbtn"><%= link_to 'Users', users_path, class: "top-menu" %></div>
           <div class="dropdown-content">
-              <div> <%= link_to current_user.username, user_path(current_user) %></div>
-              <div> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></div>
+              <div> <%= link_to current_user.username, user_path(current_user), class: "top-menu" %></div>
+              <div> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "top-menu" %></div>
           </div>
           <% else %>
-          <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></div>
+          <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path, class: "top-menu" %></div>
           <div class="dropdown-content">
-              <div><%= link_to 'Sign Up', new_user_registration_path %></div>
+              <div><%= link_to 'Sign Up', new_user_registration_path, class: "top-menu" %></div>
           </div>
           <% end %>
         </li>
-      </ul>
+      </div>
     </nav>
 
     <% if notice.is_a?(Array) %>

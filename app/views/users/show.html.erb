@@ -2,7 +2,7 @@
   <h2> <%= @user.username %> </h2>
   <h3> Joined: <%= @user.created_at.strftime("%Y-%m-%d") %> </h3>
   <% if @user.id == current_user.id %>
-    <h3> <%= link_to 'Edit Account', edit_user_registration_path %> </h3>
+    <h3> <%= link_to 'Edit Account', edit_user_registration_path, class: "link" %> </h3>
   <% end %>
 </div>
 </br>
@@ -19,8 +19,8 @@
     <p class="small-8 columns">Artist</p>
     <% @user.songs.each do |song| %>
       <p class="small-2 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
-      <p class="small-2 columns"><%= link_to "#{song.title}", song %> </p>
-      <p class="small-8 columns"><%= link_to "#{song.artist.name}", song.artist %> </p>
+      <p class="small-2 columns"><%= link_to "#{song.title}", song, class: "link" %> </p>
+      <p class="small-8 columns"><%= link_to "#{song.artist.name}", song.artist, class: "link" %> </p>
     <% end %>
   </div>
   </br>
@@ -32,7 +32,7 @@
   <% else %>
     <h3> <%= @user.username %>'s Reviews (<%= @user.reviews.length %>) </h3>
   <% end %>
-  <div class="row">
+  <div class="row text-list">
     <p class="small-2 columns">Date</p>
     <p class="small-2 columns">Title</p>
     <p class="small-2 columns">Artist</p>
@@ -40,8 +40,8 @@
     <p class="small-4 columns">Review</p>
     <% @user.reviews.each do |review| %>
       <p class="small-2 columns"><%= review.created_at.strftime("%Y-%m-%d") %> </p>
-      <p class="small-2 columns"><%= link_to review.song.title, review.song %></p>
-      <p class="small-2 columns"><%= link_to review.song.artist.name, review.song.artist %></p>
+      <p class="small-2 columns"><%= link_to review.song.title, review.song, class: "link" %></p>
+      <p class="small-2 columns"><%= link_to review.song.artist.name, review.song.artist, class: "link" %></p>
       <p class="small-2 columns"><%= review.rating %> </p>
       <p class="small-4 columns optional-field"><%= review.body %> </p>
     <% end %>

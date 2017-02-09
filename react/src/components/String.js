@@ -24,7 +24,7 @@ class String extends React.Component {
     });
 
     return(
-      <div className="App text">
+      <div className="App text-tab">
           <div className='inline-block not-bold'>
               {this.props.open}|--
           </div>
