@@ -2,53 +2,61 @@
   <h2> <%= @full_title %> </h2>
   <h3><%= link_to @song.artist.name, @song.artist, class: "link" %> </h3>
   <h3><%= link_to @song.user.username, @song.user, class: "link" %> </h3>
+  <h3><%= @song.created_at.strftime("%Y-%m-%d") %></h3>
   <% if @avg_rating != "" %>
     <h3> <%= @avg_rating %> stars</h3>
   <% end %>
+</br>
+  <div class="list row container list-wide">
+    <% if (@song.user.id == current_user.id || current_user.admin)%>
+      <h3 class="small-4 columns"><%= link_to "Edit Tab", interface_path(:option => "edit"), class: "link" %></h3>
+      <h3 class="small-4 columns"><%= link_to "View Tab", interface_path(:option => "view"), class: "link" %></h3>
+      <h3 class="small-4 columns"><%= link_to "Delete Tab", @song, data: {:confirm => 'Are you sure you want to delete this tab?'}, method: :delete, class: "link" %></h3>
+    <% else %>
+      <h3><%= link_to "View Tab", interface_path(:option => "view"), class: "link" %></h3>
+
+    <% end %>
+  </div>
 </div>
 
-<div class="row">
+<div class="review-list row centered container">
   <%= form_for [@song, @review] do |f| %>
   <div class="small-1 columns inline-block">
     <%= f.label :rating, class: "text-label" %>
     <%= f.select :rating, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]] %>
   </div>
-    <div class="small-9 columns inline-block">
+    <div class="small-10 columns inline-block">
     <%= f.label :body, "Review", class: "text-label"  %>
     <%= f.text_field :body %>
     </div>
-    <div class="small-2 columns add-review">
-      <%= f.submit "Add Review"%>
+    <div class="small-1 columns add-review">
+      <%= f.submit "Add Review", class: "form-text"%>
     </div>
     <% end %>
-  </div>
 
-<div class="text-list row container">
-  <div class="small-3 columns text-center">
+  <div class="small-3 columns">
     <p>Date</p>
   </div>
-  <div class="small-3 columns text-center">
+  <div class="small-3 columns">
     <p>User</p>
   </div>
-  <div class="small-3 columns text-center">
+  <div class="small-2 columns">
     <p>Rating</p>
   </div>
-  <div class="small-3 columns text-center">
+  <div class="small-4 columns">
     <p>Review</p>
   </div>
-</div>
-  <% @reviews.each do |review| %>
-    <div class="text-list row container">
-      <div class="small-3 columns text-center">
+    <% @reviews.each do |review| %>
+      <div class="small-3 columns">
         <p><%= review.created_at.strftime("%Y-%m-%d") %></p>
       </div>
-      <div class="small-3 columns text-center">
+      <div class="small-3 columns">
         <p><%= link_to review.user.username, review.user, class: "link" %></p>
       </div>
-      <div class="small-3 columns text-center">
+      <div class="small-2 columns">
         <p><%= review.rating %></p>
       </div>
-      <div class="small-3 columns text-center">
+      <div class="small-4 columns">
         <% if ((review.user.id == current_user.id) || current_user.admin) %>
           <p><%= review.body %>
             (<%= link_to 'Edit', edit_review_path(review), class: "link" %>/
@@ -57,13 +65,6 @@
           <p><%= review.body %></p>
         <% end %>
       </div>
-    </div>
-
   <% end %>
-
+</div>
 </br>
-<% if (@song.user.id == current_user.id || current_user.admin)%>
-  <p><%= link_to "View Tab", interface_path(:option => "view"), class: "link" %></p>
-  <p><%= link_to "Edit Tab", interface_path(:option => "edit"), class: "link" %></p>
-  <p><%= link_to "Delete Tab", @song, data: {:confirm => 'Are you sure you want to delete this tab?'}, method: :delete, class: "link" %></p>
-<% end %>

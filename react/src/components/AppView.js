@@ -27,9 +27,12 @@ class AppView extends React.Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({title: body.title});
-        this.setState({artist: body.artist});
-        this.setState({song: body.tab});
+        let song = body.tab;
+        let extra = this.props.width - (song.length % this.props.width);
+        song = song.concat(Array(extra).fill(",,,,,"))
+        this.setState({ title: body.title,
+                        artist: body.artist,
+                        song: song});
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }

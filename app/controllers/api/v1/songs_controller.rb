@@ -15,7 +15,7 @@ class Api::V1::SongsController < ApplicationController
     @song.user = current_user
     song_info = JSON.parse(request.body.read)
     @song.title = song_info["title"]
-    @song.tab = song_info["tab"]
+    @song.tab = song_info["tab"] || ""
     if song_info["version"]
       @song.version = song_info["version"]
     else

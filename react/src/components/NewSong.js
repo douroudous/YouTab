@@ -228,9 +228,9 @@ class NewSong extends React.Component {
       <div>
         <div className={this.state.options}>
           <div className="text centered">
-            <button className="button" onClick={() => this.handleToggle("new")}>New</button><br/>
-            <button className="button" onClick={() => this.handleToggle("existing")}>Existing</button><br/>
-            <button className="button" onClick={() => this.handleToggle("import")}>Import from Existing Tab</button>
+            <button className="button new-button" onClick={() => this.handleToggle("new")}>New</button><br/>
+            <button className="button new-button" onClick={() => this.handleToggle("existing")}>Existing</button><br/>
+            <button className="button new-button" onClick={() => this.handleToggle("import")}>Import Existing</button>
           </div>
         </div>
         <div className={this.state.newSong}>
@@ -248,7 +248,7 @@ class NewSong extends React.Component {
         </div>
         <div className={this.state.backButton}>
           <div className="text centered">
-            <button className="button" onClick={() => this.handleBack("new")}>Back</button>
+            <button className="button new-button" onClick={() => this.handleBack("new")}>Back</button>
           </div>
         </div>
       </div>

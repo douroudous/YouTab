@@ -1,27 +1,24 @@
 <div class="animated fadeIn">
   <h2> <%= @artist.name %> </h2>
-  <h3><%= link_to "New #{@artist.name} Tab", entry_path, class: "link" %></h3>
+  <h3><%= button_to "New Tab", entry_path, class: "button new-button", method: :get %></h3>
 </div>
 
-</br>
-<div class="text-list row container">
-  <div class="small-6 columns text-center">
+<div class="list-small row centered container">
+  <div class="small-6 columns">
     <p>Title</p>
   </div>
-  <div class="small-6 columns text-center">
+  <div class="small-6 columns">
     <p>User</p>
   </div>
-</div>
   <% @sorted_songs.each do |song| %>
-    <div class="text-list row container">
-      <div class="small-6 columns text-center">
+      <div class="small-6 columns">
         <p><%= link_to "#{full_title(song)}", song, class: "link" %></p>
       </div>
-      <div class="small-6 columns text-center">
+      <div class="small-6 columns">
         <p><%= link_to song.user.username, song.user, class: "link" %></p>
       </div>
-    </div>
   <% end %>
+  </div>
 </br>
 
 <% if current_user.admin %>

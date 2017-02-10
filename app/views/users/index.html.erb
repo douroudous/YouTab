@@ -7,14 +7,11 @@
 <% end %>
 
 </br>
-<% @users.each do |user| %>
-  <div class="text-list row container">
-    <div class="text-center">
+  <% @users.each do |user| %>
+    <div class="list-small row container centered">
       <p class="inline-block"><%= link_to user.username, user, class: "link" %></p>
       <% if ((user.id != current_user.id) && current_user.admin) %>
         <p class="inline-block">(<%= link_to "Delete", user, method: :delete, class: "link" %>)</p>
       <% end %>
     </div>
-  </div>
-
-<% end %>
+  <% end %>

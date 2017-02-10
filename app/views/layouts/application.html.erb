@@ -9,48 +9,48 @@
   </head>
 
   <body>
-    <h1>YouTab</h1>
-    <nav>
-      <div class="row container">
-        <li class="dropdown">
-          <div class="dropbtn"><%= link_to "Tabs", root_path, class: "top-menu"%></div>
-          <div class="dropdown-content">
-          </div>
-        </li>
-        <li class="dropdown">
-          <div class="dropbtn"><%= link_to "Artists", artists_path, class: "top-menu" %></div>
-          <div class="dropdown-content">
-              <div><%= link_to "New Artist", new_artist_path, class: "top-menu" %></div>
-          </div>
-        </li>
-        <li class="dropdown">
+    <header>
+      <h1 class="you inline-block">You</h1>
+      <h1 class="inline-block">Tab</h1>
+      <nav class="review-list row container centered">
+        <div class="small-3 columns">
+          <span class="dropbtn"><%= link_to "Tabs", root_path %></span>
+        </div>
+        <div class="small-3 columns">
+          <span class="dropbtn"><%= link_to "Artists", artists_path %></span>
+        </div>
           <% if user_signed_in? %>
-          <div class="dropbtn"><%= link_to 'Users', users_path, class: "top-menu" %></div>
-          <div class="dropdown-content">
-              <div> <%= link_to current_user.username, user_path(current_user), class: "top-menu" %></div>
-              <div> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "top-menu" %></div>
-          </div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Users', users_path%></span>
+            </div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></span>
+            </div>
           <% else %>
-          <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path, class: "top-menu" %></div>
-          <div class="dropdown-content">
-              <div><%= link_to 'Sign Up', new_user_registration_path, class: "top-menu" %></div>
-          </div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></span>
+            </div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Sign Up', new_user_registration_path %></span>
+            </div>
           <% end %>
-        </li>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
-    <% if notice.is_a?(Array) %>
-      <% notice.each do |this_notice| %>
-        <p class="notice"><%= this_notice %></p>
+    <main>
+    </br>
+      <% if notice.is_a?(Array) %>
+        <% notice.each do |this_notice| %>
+          <p class="notice"><%= this_notice %></p>
+        <% end %>
+      <%elsif notice %>
+        <p class="notice"> <%= notice %></p>
       <% end %>
-    <%elsif notice %>
-      <p class="notice"> <%= notice %></p>
-    <% end %>
 
-    <p class="alert"><%= alert %></p>
+      <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+      <%= yield %>
+    </main>
 
   </body>
 </html>

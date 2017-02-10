@@ -24,7 +24,7 @@ const Note  = props => {
   }
 
   return(
-    <div className='inline-block text-tab'>
+    <div className='inline-block'>
       <span className={selectedNoteClass} id={props.id} data-track={props.trackId} data-string={props.stringId} onClick={props.handleSelect}>
         {note}
       </span>
