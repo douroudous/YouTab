@@ -6,10 +6,6 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  # resources :artists do
-  #   resources :songs, only: [:new, :create]
-  # end
-
   resources :artists
   resources :users, only: [:index, :show, :destroy]
   resources :reviews, only: [:edit, :update, :destroy]

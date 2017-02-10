@@ -251,16 +251,16 @@ handleInsertMeasure() {
     }
 
     return(
-      <div className="animated fadeIn react-interface">
+      <div className="animated fadeIn">
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
-        <button className="button inline-block" onClick={() => this.handleSave()}>Save Tab</button>
-        <button className="button inline-block" onClick={() => this.handleRemoveBlanks()}>Delete Trailing Spaces</button>
-        <button className="button inline-block" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
-        <div className="inline-block">
-          <div className={this.state.editBox}>
-            <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure Line</button>
-          </div>
+        <div className="centered">
+          <button className="button inline-block" onClick={() => this.handleSave()}>Save Tab</button>
+          <button className="button inline-block" onClick={() => this.handleRemoveBlanks()}>Clear Trailing Space</button>
+          <button className="button inline-block" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
+            <div className="inline-block button">
+              <button className={this.state.editBox} onClick={() => this.handleInsertMeasure()}>Insert Measure</button>
+            </div>
         </div>
         <ul>
           {tracks}
