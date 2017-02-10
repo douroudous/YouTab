@@ -255,26 +255,23 @@ handleInsertMeasure() {
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
         <div className="centered">
-          <button className="button inline-block" onClick={() => this.handleSave()}>Save Tab</button>
+          <button className="button" onClick={() => this.handleSave()}>Save Tab</button>
           <button className="button inline-block" onClick={() => this.handleRemoveBlanks()}>Clear Trailing Space</button>
           <button className="button inline-block" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
-            <div className="inline-block button">
-              <button className={this.state.editBox} onClick={() => this.handleInsertMeasure()}>Insert Measure</button>
-            </div>
         </div>
         <ul>
           {tracks}
         </ul>
-        <div className={this.state.editBox}>
-          <form className='columns small-2'>
-            <input className='edit-box' type="text"/>
-          </form>
-          <button className="button columns small-3" onClick={() => this.handleEdit()}>Add/Edit Note</button>
-          <button className="button columns small-3" onClick={() => this.handleDelete()}>Delete Note</button>
-          <button className="button columns small-2" onClick={() => this.handleInsert()}>Insert Space</button>
-          <button className="button columns small-2" onClick={() => this.handleRemove()}>Remove Space</button>
-
-        </div>
+          <div className={this.state.editBox}>
+            <form className='small-2 columns inline-block'>
+              <input className='edit-box' type="text"/>
+            </form>
+            <button className="button" onClick={() => this.handleEdit()}>Add/Edit Note</button>
+            <button className="button" onClick={() => this.handleDelete()}>Delete Note</button>
+            <button className="button" onClick={() => this.handleInsert()}>Insert Space</button>
+            <button className="button" onClick={() => this.handleRemove()}>Remove Space</button>
+            <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure</button>
+          </div>
       </div>
     );
   }

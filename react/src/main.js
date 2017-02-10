@@ -34,7 +34,7 @@ $(function() {
       <AppView
         data={data}
         songId={parseInt(view.dataset.id)}
-        width={5}
+        width={40}
       />
       </div>,
       view

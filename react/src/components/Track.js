@@ -43,7 +43,7 @@ class Track extends React.Component {
 
 
       return (
-        <div className="page">
+        <div>
           <br/>
           <ul>
             {strings}

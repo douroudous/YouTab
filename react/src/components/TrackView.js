@@ -30,7 +30,7 @@ const TrackView  = props => {
   });
 
     return (
-      <div className="page">
+      <div>
         <br/>
         <ul>
           {strings}

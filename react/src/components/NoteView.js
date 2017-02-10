@@ -2,21 +2,25 @@ import React from 'react';
 
 const NoteView  = props => {
 
-  let note = "---";
-  if (props.note.length == 1){
-    note = note + props.note + "--";
-  } else if (props.note.length == 2){
-    note = note + props.note + "-";
-  } else if (props.note.length == 0){
-    note = note + "---";
+  let note = props.note;
+  let noteBuffer;
+  if (note.length == 1){
+    noteBuffer = "--";
+  } else if (note.length == 2){
+    noteBuffer = "-";
+  } else if (note.length == 0){
+    note = "-";
+    noteBuffer = "--";
   }
 
   return(
     <div className='inline-block'>
-      <p className='text'>
+      <span>
         {note}
-      </p>
+      </span>
+      <span>{noteBuffer}</span>
     </div>
+
   );
 };
 

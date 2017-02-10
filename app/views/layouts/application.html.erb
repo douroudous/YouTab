@@ -12,7 +12,7 @@
     <header>
       <h1 class="you inline-block">You</h1>
       <h1 class="inline-block">Tab</h1>
-      <nav class="list-wide row container centered">
+      <nav class="review-list row container centered">
         <div class="small-3 columns">
           <span class="dropbtn"><%= link_to "Tabs", root_path %></span>
         </div>
@@ -27,14 +27,18 @@
               <span class="dropbtn"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></span>
             </div>
           <% else %>
-            <span class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></span>
-            <span class="dropbtn"><%= link_to 'Sign Up', new_user_registration_path %></span>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></span>
+            </div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Sign Up', new_user_registration_path %></span>
+            </div>
           <% end %>
-        </li>
       </nav>
     </header>
 
     <main>
+    </br>
       <% if notice.is_a?(Array) %>
         <% notice.each do |this_notice| %>
           <p class="notice"><%= this_notice %></p>

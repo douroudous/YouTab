@@ -72,9 +72,9 @@ header a:hover {
 
 .dropbtn {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 12px;
   margin-bottom: 10px;
-  width: 140px;
+  text-align: center;
 }
 
 .link {

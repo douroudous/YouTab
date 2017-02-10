@@ -14,12 +14,13 @@ const StringView  = props => {
   });
 
   return(
-    <div className="App row">
-      <div className='text'>
+    <div className="App tabs-text">
         <div className='inline-block'>
-            {props.open}|-{notes}-
+            {props.open}|--
         </div>
-      </div>
+        <div className='inline-block'>
+            {notes}
+        </div>
     </div>
   );
 };
