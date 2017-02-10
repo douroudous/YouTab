@@ -12,20 +12,23 @@
     <header>
       <h1 class="you inline-block">You</h1>
       <h1 class="inline-block">Tab</h1>
-      <nav>
-        <li class="inline-block">
-          <div class="dropbtn"><%= link_to "Tabs", root_path %></div>
-        </li>
-        <li class="inline-block">
-          <div class="dropbtn"><%= link_to "Artists", artists_path %></div>
-        </li>
-        <li class="inline-block">
+      <nav class="list-wide row container centered">
+        <div class="small-3 columns">
+          <span class="dropbtn"><%= link_to "Tabs", root_path %></span>
+        </div>
+        <div class="small-3 columns">
+          <span class="dropbtn"><%= link_to "Artists", artists_path %></span>
+        </div>
           <% if user_signed_in? %>
-            <div class="dropbtn"><%= link_to 'Users', users_path%></div>
-            <div class="dropbtn"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Users', users_path%></span>
+            </div>
+            <div class="small-3 columns">
+              <span class="dropbtn"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></span>
+            </div>
           <% else %>
-            <div class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></div>
-            <div class="dropbtn"><%= link_to 'Sign Up', new_user_registration_path %></div>
+            <span class="dropbtn"><%= link_to 'Sign In', new_user_session_path %></span>
+            <span class="dropbtn"><%= link_to 'Sign Up', new_user_registration_path %></span>
           <% end %>
         </li>
       </nav>

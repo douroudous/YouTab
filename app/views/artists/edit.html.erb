@@ -1,9 +1,11 @@
 <h2>Edit Artist Form</h2>
 
-<%= form_for(@artist) do |f| %>
-  <div class="inline-block form-text">
-    <%= f.label :name, class: "form-label" %>
-    <%= f.text_field :name %>
-    <%= f.submit "Update Artist"%>
-  </div>
-<% end %>
+<div class="centered">
+  <%= form_for(@artist) do |f| %>
+    <div class="inline-block form-text">
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name %>
+      <%= f.submit "Update Artist"%>
+    </div>
+  <% end %>
+</div>

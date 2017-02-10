@@ -41,7 +41,11 @@ header h1 {
   padding-top: 0.7em;
 }
 
-.list {
+.list-small {
+  max-width: 30em;
+}
+
+.list-wide {
   max-width: 40em;
 }
 
@@ -66,10 +70,11 @@ header a:hover {
   color: #101820;
 }
 
-li a, .dropbtn {
+.dropbtn {
   display: inline-block;
-  padding: 14px 16px;
-  min-width: 100px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 140px;
 }
 
 .link {
@@ -162,7 +167,7 @@ a:hover {
 }
 
 .field {
-  width: 50%;
+  color: white;
 }
 
 .display-none {
@@ -174,12 +179,10 @@ a:hover {
 }
 
 #search {
-  height: 70px;
-  border-radius: 15px;
+  border-radius: 290486px;
   text-align: center;
   font-size: 1.5rem;
   background-color: #CDDCDE;
-  box-shadow: 5px 5px 2px grey;
-  width: 40%;
+  width: 30%;
   margin: 0 auto;
 }
