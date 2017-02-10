@@ -13,18 +13,20 @@
   <% else %>
     <h3> <%= @user.username %>'s Tabs (<%= @user.songs.length %>)</h3>
   <% end %>
-  <div class="row">
-    <p class="small-2 columns">Date</p>
-    <p class="small-2 columns">Title</p>
-    <p class="small-8 columns">Artist</p>
+  <div class="list row container">
+    <p class="small-4 columns">Date</p>
+    <p class="small-4 columns">Title</p>
+    <p class="small-4 columns">Artist</p>
     <% @user.songs.each do |song| %>
-      <p class="small-2 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
-      <p class="small-2 columns"><%= link_to "#{song.title}", song, class: "link" %> </p>
-      <p class="small-8 columns"><%= link_to "#{song.artist.name}", song.artist, class: "link" %> </p>
+      <p class="small-4 columns"><%= song.created_at.strftime("%Y-%m-%d") %> </p>
+      <p class="small-4 columns"><%= link_to "#{song.title}", song, class: "link" %> </p>
+      <p class="small-4 columns"><%= link_to "#{song.artist.name}", song.artist, class: "link" %> </p>
     <% end %>
-  </div>
-  </br>
 <% end %>
+</div>
+</br>
+
+<div class="review-list row container">
 
 <% if @user.reviews.length > 0 %>
   <% if @user.id == current_user.id %>
@@ -34,16 +36,17 @@
   <% end %>
   <div class="row text-list">
     <p class="small-2 columns">Date</p>
-    <p class="small-2 columns">Title</p>
+    <p class="small-3 columns">Title</p>
     <p class="small-2 columns">Artist</p>
-    <p class="small-2 columns">Rating</p>
+    <p class="small-1 columns">Rating</p>
     <p class="small-4 columns">Review</p>
     <% @user.reviews.each do |review| %>
       <p class="small-2 columns"><%= review.created_at.strftime("%Y-%m-%d") %> </p>
-      <p class="small-2 columns"><%= link_to review.song.title, review.song, class: "link" %></p>
-      <p class="small-2 columns"><%= link_to review.song.artist.name, review.song.artist, class: "link" %></p>
-      <p class="small-2 columns"><%= review.rating %> </p>
-      <p class="small-4 columns optional-field"><%= review.body %> </p>
+      <p class="small-3 columns"><%= link_to review.song.title, review.song, class: "link" %></p>
+      <p class="small-3 columns"><%= link_to review.song.artist.name, review.song.artist, class: "link" %></p>
+      <p class="small-1 columns"><%= review.rating %> </p>
+      <p class="small-3 columns optional-field"><%= review.body %> </p>
     <% end %>
   </div>
 <% end %>
+</div>

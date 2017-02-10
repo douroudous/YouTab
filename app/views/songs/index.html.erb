@@ -7,28 +7,25 @@
 <% end %>
 
 </br>
-<div class="text-list row container">
-  <div class="small-4 columns text-center">
+<div class="list row container">
+  <div class="small-4 columns">
     <p>Title</p>
   </div>
-  <div class="small-4 columns text-center">
+  <div class="small-4 columns">
     <p>Artist</p>
   </div>
-  <div class="small-4 columns text-center">
+  <div class="small-4 columns">
     <p>User</p>
   </div>
-</div>
 <% @songs.each do |song| %>
-  <div class="text-list row container">
-    <div class="small-4 columns text-center">
+    <div class="small-4 columns">
       <p><%= link_to "#{full_title(song)}", song, class: "link" %></p>
     </div>
-    <div class="small-4 columns text-center">
+    <div class="small-4 columns">
       <p><%= link_to "#{song.artist.name}", song.artist, class: "link" %></p>
     </div>
-    <div class="small-4 columns text-center">
+    <div class="small-4 columns">
       <p><%= link_to "#{song.user.username}", song.user, class: "link" %></p>
     </div>
-  </div>
-
 <% end %>
+  </div>

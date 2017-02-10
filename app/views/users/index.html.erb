@@ -8,9 +8,11 @@
 
 </br>
 <% @users.each do |user| %>
-  <div class="text-list row container">
-    <div class="text-center">
-      <p class="inline-block"><%= link_to user.username, user, class: "link" %></p>
+  <div class="list row container">
+    <div class="small-6 columns">
+      <p><%= link_to user.username, user, class: "link" %></p>
+    </div>
+    <div class="small-6 columns">
       <% if ((user.id != current_user.id) && current_user.admin) %>
         <p class="inline-block">(<%= link_to "Delete", user, method: :delete, class: "link" %>)</p>
       <% end %>

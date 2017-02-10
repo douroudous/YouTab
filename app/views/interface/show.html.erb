@@ -1,2 +1,2 @@
-<p><%= link_to "Back to #{@song.title}", @song, class: "link"%></p>
+<p><%= button_to "Back to song", song_path(@song), class: "button new-button", method: :get %></p>
 <div id="<%= @class %>" data-id="<%= @song.id %>"></div>

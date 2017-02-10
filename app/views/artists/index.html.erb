@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
   <h2>Artists</h2>
-  <h3><%= link_to "New Artist", new_artist_path, class: "link" %></h3>
+  <h3><%= button_to "New Artist", new_artist_path, class: "button new-button", method: :get %></h3>
 </div>
 
 <%= form_tag(artists_path, :method => "get", id: "search-form") do %>
@@ -8,21 +8,19 @@
 <% end %>
 
 </br>
-<div class="text-list row container">
-  <div class="small-6 columns text-center">
+<div class="list row container">
+  <div class="small-6 columns">
     <p>Title</p>
   </div>
-  <div class="small-6 columns text-center">
+  <div class="small-6 columns">
     <p># of Tabs</p>
   </div>
-</div>
 <% @artists.each do |artist| %>
-  <div class="text-list row container">
-    <div class="small-6 columns text-center">
+    <div class="small-6 columns">
       <p><%= link_to artist.name, artist, class: "link" %></p>
     </div>
-    <div class="small-6 columns text-center">
+    <div class="small-6 columns">
       <p><%= artist.songs.length %></p>
     </div>
-  </div>
 <% end %>
+</div>

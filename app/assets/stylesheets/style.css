@@ -41,6 +41,14 @@ header h1 {
   padding-top: 0.7em;
 }
 
+.list {
+  max-width: 40em;
+}
+
+.review-list {
+  max-width: 60em;
+}
+
 header a {
   border: 1px solid #009ca3;
   border-radius: 290486px;
@@ -82,9 +90,21 @@ a:hover {
   margin-right: 10px;
 }
 
+.button:focus {
+  outline: none;
+}
+
 .button:hover {
   background-color:  #009ca3;
   color: #101820;
+}
+
+.form-text {
+  color: #101820;
+}
+
+.form-label {
+  color: white;
 }
 
 .tabs-text {
@@ -94,6 +114,8 @@ a:hover {
 
 .new-button {
   font-size: 1rem;
+  text-transform: uppercase;
+
 }
 
 .import-button {
@@ -120,6 +142,7 @@ a:hover {
 
 
 .notice, .selected {
+  text-align: center;
   color: red;
   font-weight: bold;
 }
