@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Note  = props => {
-
   let note = props.note;
   let noteBuffer;
   if (note.length == 1){
@@ -12,7 +11,6 @@ const Note  = props => {
     note = "-";
     noteBuffer = "--";
   }
-
   let selectedNoteClass = "";
   if ((parseInt(props.editTrackId) == props.trackId) &&
       (parseInt(props.editNoteId) == props.id)){

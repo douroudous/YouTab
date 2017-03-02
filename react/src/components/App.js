@@ -17,6 +17,7 @@ class App extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    // this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleInsert = this.handleInsert.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -81,17 +82,27 @@ class App extends React.Component {
     chordArray[editStringId] = newNote;
     chordArray = chordArray.join();
     song[chordLocation] = chordArray;
-    if (editNoteId == this.props.width - 1) {
-      editTrackId += 1;
-      editNoteId = 0;
-    } else {
-      editNoteId += 1;
-    }
     this.setState({ song: song,
                     editTrackId: editTrackId,
                     editNoteId: editNoteId,
                     editNote: ""});
   }
+
+  // handleKeyPress(event){
+  //   if(event.key == 'Enter'){
+  //     event.preventDefault();
+  //     let editStringId = parseInt(this.state.editStringId);
+  //     let editNote = document.getElementsByClassName("selected")[0].innerHTML;
+  //     let editBox = document.getElementsByClassName("edit-box")[0];
+  //     console.log(editNote);
+  //     if (editNote != "-") {
+  //       editBox.value = editNote;
+  //     } else {
+  //       editBox.value = "";
+  //     }
+  //     this.setState({ editStringId: editStringId + 1});
+  //   }
+  // }
 
   handleDelete() {
     let song = this.state.song;
@@ -264,9 +275,8 @@ handleInsertMeasure() {
         </ul>
           <div className={this.state.editBox}>
             <form className='small-2 columns inline-block'>
-              <input className='edit-box' type="text"/>
+              <input onChange={this.handleEdit} className='edit-box' type="text"/>
             </form>
-            <button className="button" onClick={() => this.handleEdit()}>Add/Edit Note</button>
             <button className="button" onClick={() => this.handleDelete()}>Delete Note</button>
             <button className="button" onClick={() => this.handleInsert()}>Insert Space</button>
             <button className="button" onClick={() => this.handleRemove()}>Remove Space</button>

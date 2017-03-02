@@ -23,12 +23,14 @@ class String extends React.Component {
       );
     });
 
+    let stringClass = "inline-block string-" + this.props.id;
+
     return(
       <div className="App tabs-text">
           <div className='inline-block'>
               {this.props.open}|--
           </div>
-          <div className='inline-block'>
+          <div className={stringClass}>
               {notes}
           </div>
       </div>
