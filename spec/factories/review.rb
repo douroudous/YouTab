@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :song do
+  factory :review do
     rating {rand(1..5)}
     sequence(:body) { |n| "body#{n}" }
     song
