@@ -4,7 +4,7 @@ feature "visitor sees a list of songs" do
   scenario "sees a list of songs" do
     user = FactoryGirl.create(:user)
     artist = FactoryGirl.create(:artist)
-    song = FactoryGirl.create(:song, user: user, artist: song)
+    song = FactoryGirl.create(:song, user: user, artist: artist)
 
     visit root_path
     click_link 'Sign In'
