@@ -12,12 +12,10 @@ class App extends React.Component {
       editStringId: "",
       editNoteId: "",
       editNote: "",
-      editBox: "hidden"
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    // this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleInsert = this.handleInsert.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -27,6 +25,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+
     fetch(`/api/v1/songs/${this.props.songId}.json`,
       { method: 'get',
         credentials: 'include'
@@ -58,17 +57,11 @@ class App extends React.Component {
     let editStringId= event.target.dataset.string;
     let editTrackId= event.target.dataset.track;
     let chordArray = this.state.song[editNoteId].split(",");
-    let editBox = document.getElementsByClassName("edit-box")[0];
-    if (editNote != "-") {
-      editBox.value = editNote;
-    } else {
-      editBox.value = "";
-    }
+    document.getElementsByClassName("edit-box")[0].value = "";
     this.setState({ editTrackId: editTrackId,
                     editStringId: editStringId,
                     editNoteId: editNoteId,
-                    editNote: editNote,
-                    editBox: ""});
+                    editNote: editNote});
   }
 
   handleEdit(event) {
@@ -88,22 +81,6 @@ class App extends React.Component {
                     editNote: ""});
   }
 
-  // handleKeyPress(event){
-  //   if(event.key == 'Enter'){
-  //     event.preventDefault();
-  //     let editStringId = parseInt(this.state.editStringId);
-  //     let editNote = document.getElementsByClassName("selected")[0].innerHTML;
-  //     let editBox = document.getElementsByClassName("edit-box")[0];
-  //     console.log(editNote);
-  //     if (editNote != "-") {
-  //       editBox.value = editNote;
-  //     } else {
-  //       editBox.value = "";
-  //     }
-  //     this.setState({ editStringId: editStringId + 1});
-  //   }
-  // }
-
   handleDelete() {
     let song = this.state.song;
     let editNoteId = parseInt(this.state.editNoteId);
@@ -118,8 +95,7 @@ class App extends React.Component {
                     editTrackId: "",
                     editStringId: "",
                     editNoteId: "",
-                    editNote: "",
-                    editBox: "hidden"});
+                    editNote: ""});
   }
 
   handleInsert() {
@@ -231,6 +207,9 @@ handleInsertMeasure() {
   }
 
   render() {
+    if (this.refs.input){
+      this.refs.input.focus();
+    }
     let width = this.props.width;
     let song = this.state.song;
 
@@ -266,21 +245,19 @@ handleInsertMeasure() {
         <h3>{this.state.title} - {this.state.artist}</h3>
         <br/>
         <div className="centered">
+          <button className="button" onClick={() => this.handleDelete()}>Delete Note</button>
+          <button className="button" onClick={() => this.handleInsert()}>Insert Space</button>
+          <button className="button" onClick={() => this.handleRemove()}>Remove Space</button>
+          <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure</button>
+          <button className="button" onClick={() => this.handleRemoveBlanks()}>Clear Trailing</button>
+          <button className="button" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
           <button className="button" onClick={() => this.handleSave()}>Save Tab</button>
-          <button className="button inline-block" onClick={() => this.handleRemoveBlanks()}>Clear Trailing Space</button>
-          <button className="button inline-block" onClick={() => this.handleInsertLine()}>Insert Blank Line</button>
         </div>
         <ul>
           {tracks}
         </ul>
-          <div className={this.state.editBox}>
-            <form className='small-2 columns inline-block'>
-              <input onChange={this.handleEdit} className='edit-box' type="text"/>
-            </form>
-            <button className="button" onClick={() => this.handleDelete()}>Delete Note</button>
-            <button className="button" onClick={() => this.handleInsert()}>Insert Space</button>
-            <button className="button" onClick={() => this.handleRemove()}>Remove Space</button>
-            <button className="button" onClick={() => this.handleInsertMeasure()}>Insert Measure</button>
+          <div className="note-form">
+            <input ref="input" onChange={this.handleEdit} className='edit-box' type="text"/>
           </div>
       </div>
     );
